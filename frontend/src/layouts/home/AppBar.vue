@@ -8,10 +8,10 @@
       height="80"
     >
       <base-img
-        :src="require('@/assets/logo.svg')"
+        :src="require('@/assets/logo.png')"
         class="mr-3 hidden-xs-only"
         contain
-        max-width="52"
+        max-width="140"
         width="100%"
       />
 
@@ -21,7 +21,7 @@
         max-width="128"
         width="100%"
       /> -->
-      <base-heading title="GETCA" />
+      <!-- <base-heading title="GETCA" /> -->
 
       <v-spacer />
 
@@ -80,9 +80,9 @@
     }),
 
     created () {
-      axios.get('/api/test').then((response) => {
-        alert(JSON.stringify(response.data))
-      })
+      // axios.get('/api/test').then((response) => {
+      //   alert(JSON.stringify(response.data))
+      // })
     },
 
   }
