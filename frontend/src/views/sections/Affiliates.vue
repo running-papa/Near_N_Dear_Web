@@ -1,18 +1,11 @@
 <template>
-  <base-section
-    id="affiliates"
-    class="grey lighten-4"
-    space="36"
-  >
+  <base-section id="affiliates" class="grey lighten-4" space="36">
     <v-container>
-      <base-section-heading title="Who's using Zero?" />
+      <base-section-heading title="협력사" />
 
       <v-slide-group>
         <template v-for="n in 6">
-          <v-slide-item
-            :key="n"
-            class="align-self-center"
-          >
+          <v-slide-item :key="n" class="align-self-center">
             <base-img
               :src="require(`@/assets/logo-${n}.png`)"
               color="grey"
@@ -38,7 +31,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'SectionAffiliates',
-  }
+export default {
+  name: "SectionAffiliates",
+};
 </script>

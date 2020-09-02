@@ -1,9 +1,9 @@
 {
-  "name": "@vuetify-themes/zero",
-  "version": "1.1.0",
+  "name": "nearndear",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "npm run lint -- --fix && vue-cli-service serve",
+    "dev": "npm run && vue-cli-service serve",
     "build": "rm -rf ../public/{js,css,img} --force && vue-cli-service build --no-clean",
     "lint": "vue-cli-service lint",
     "postversion": "node scripts/postversion.js"

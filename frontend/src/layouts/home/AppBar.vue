@@ -1,12 +1,6 @@
 <template>
   <div>
-    <v-app-bar
-      id="home-app-bar"
-      app
-      color="white"
-      elevation="1"
-      height="80"
-    >
+    <v-app-bar id="home-app-bar" app color="white" elevation="1" height="80">
       <base-img
         :src="require('@/assets/logo.png')"
         class="mr-3 hidden-xs-only"
@@ -20,16 +14,13 @@
         contain
         max-width="128"
         width="100%"
-      /> -->
+      />-->
       <!-- <base-heading title="GETCA" /> -->
 
       <v-spacer />
 
       <div>
-        <v-tabs
-          class="hidden-sm-and-down"
-          optional
-        >
+        <v-tabs class="hidden-sm-and-down" optional>
           <v-tab
             v-for="(name, i) in items"
             :key="i"
@@ -40,59 +31,39 @@
             class="font-weight-bold"
             min-width="96"
             text
-          >
-            {{ name }}
-          </v-tab>
+          >{{ name }}</v-tab>
         </v-tabs>
       </div>
 
-      <v-app-bar-nav-icon
-        class="hidden-md-and-up"
-        @click="drawer = !drawer"
-      />
+      <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawer = !drawer" />
     </v-app-bar>
 
-    <home-drawer
-      v-model="drawer"
-      :items="items"
-    />
+    <home-drawer v-model="drawer" :items="items" />
   </div>
 </template>
 
 <script>
-  import axios from 'axios'
-  export default {
-    name: 'HomeAppBar',
+export default {
+  name: "HomeAppBar",
 
-    components: {
-      HomeDrawer: () => import('./Drawer'),
-    },
+  components: {
+    HomeDrawer: () => import("./Drawer"),
+  },
 
-    data: () => ({
-      drawer: null,
-      items: [
-        'Home',
-        'About',
-        'Contact',
-        'Pro',
-        'Login',
-      ],
-    }),
+  data: () => ({
+    drawer: null,
+    items: ["Home", "About", "Contact", "Login"],
+  }),
 
-    created () {
-      // axios.get('/api/test').then((response) => {
-      //   alert(JSON.stringify(response.data))
-      // })
-    },
-
-  }
+  created() {},
+};
 </script>
 
 <style lang="sass">
-  #home-app-bar
-    .v-tabs-slider
-      max-width: 24px
-      margin: 0 auto
+#home-app-bar
+  .v-tabs-slider
+    max-width: 24px
+    margin: 0 auto
 
     .v-tab
       &::before

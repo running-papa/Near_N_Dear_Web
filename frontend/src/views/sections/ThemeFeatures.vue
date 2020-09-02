@@ -1,24 +1,11 @@
 <template>
   <base-section id="theme-features">
-    <base-section-heading title="Theme Features">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, in! Asperiores, impedit libero. Veniam rerum saepe unde nihil possimus quibusdam esse accusamus mollitia magni fuga.
-    </base-section-heading>
+    <base-section-heading title="Near N Dear">이민을 희망하는 모든이들의 도움을 주는 혁신적인 시스템</base-section-heading>
 
     <v-container>
       <v-row>
-        <v-col
-          v-for="(feature, i) in features"
-          :key="i"
-          cols="12"
-          md="6"
-        >
-          <base-avatar-card
-            v-bind="feature"
-            align="left"
-            horizontal
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis illum veniam cum dolores ratione commodi beatae quas maxime, laboriosam excepturi solut!
-          </base-avatar-card>
+        <v-col v-for="(feature, i) in features" :key="i" cols="12" md="6">
+          <base-avatar-card v-bind="feature" align="left" horizontal></base-avatar-card>
         </v-col>
       </v-row>
     </v-container>
@@ -26,38 +13,30 @@
 </template>
 
 <script>
-  export default {
-    name: 'SectionThemeFeatures',
+export default {
+  name: "SectionThemeFeatures",
 
-    data: () => ({
-      features: [
-        {
-          title: 'Pixel Perfect Design',
-          icon: 'mdi-fountain-pen-tip',
-        },
-        {
-          title: 'Retina Ready',
-          icon: 'mdi-cellphone',
-        },
-        {
-          color: 'primary',
-          dark: true,
-          title: 'Easily Customizable',
-          icon: 'mdi-pencil-box-outline',
-        },
-        {
-          title: 'Image Parallax',
-          icon: 'mdi-image-size-select-actual',
-        },
-        {
-          title: 'Seo Optimized',
-          icon: 'mdi-ice-pop',
-        },
-        {
-          title: '24/7 Support',
-          icon: 'mdi-help-circle-outline',
-        },
-      ],
-    }),
-  }
+  data: () => ({
+    features: [
+      {
+        title: "당신이 살고 싶은 집을 선택하세요.",
+        icon: "mdi-fountain-pen-tip",
+      },
+      {
+        title: "당신이 구매할 차를 선택하세요.",
+        icon: "mdi-cellphone",
+      },
+      {
+        // color: "primary",
+        // dark: true,
+        title: "휴대폰이 필요한가요?",
+        icon: "mdi-pencil-box-outline",
+      },
+      {
+        title: "모든 전문 영어 서비스는 무료입니다.",
+        icon: "mdi-image-size-select-actual",
+      },
+    ],
+  }),
+};
 </script>
