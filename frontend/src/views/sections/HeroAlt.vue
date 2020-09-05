@@ -47,7 +47,7 @@ export default {
 
   computed: {
     gradient() {
-      const color = `${this.$vuetify.theme.themes.light.secondary}CC`;
+      const color = `${this.$vuetify.theme.themes.light.success}CC`;
       const overlay = RGBAtoCSS(HexToRGBA(color));
 
       return `to top, ${overlay}, ${overlay}`;

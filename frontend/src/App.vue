@@ -8,7 +8,7 @@
   export default {
     name: 'App',
     metaInfo: {
-      title: 'App',
+      title: 'Near N Dear',
       titleTemplate: '%s',
       htmlAttrs: { lang: 'en' },
       meta: [

@@ -8,7 +8,7 @@
     >
       <v-container class="fill-height px-4 py-8">
         <v-responsive class="d-flex align-center" height="100%" max-width="700" width="100%">
-          <base-heading title="캐나다 정착을 위한 똑똑한 습관" />
+          <base-heading title="캐나다 정착을 위한" />
 
           <base-body>새로워진 Near N Dear 를 경험 해보세요.</base-body>
 
