@@ -24,21 +24,22 @@
       dense
       nav
     >
-      <v-list-item>
+      <v-list-item
+      to="/page/user">
         <v-list-item-avatar
           class="align-self-center"
           color="white"
           contain
         >
           <v-img
-            :src="require('@/assets/user-1.jpg')"
+            :src="this.user.user_avatar"
             max-height="50"
           />
         </v-list-item-avatar>
 
         <v-list-item-content>
           <v-list-item-title
-            v-text="profile.title"
+            v-text="this.user.name"
           />
         </v-list-item-content>
       </v-list-item>
@@ -97,8 +98,35 @@
         default: false,
       },
     },
+    mounted() {
+      if ( this.$store.state.accessToken != null && this.$store.state.user != null)
+      {
+        this.user = this.$store.getters.getUser;
 
+        if ( this.user == null )
+        {
+           this.$swal.fire({
+            icon: 'error',
+            title: this.$t('login_auth_error')             
+            })
+            this.isResister = false;
+            this.$router.replace('/login');
+            return;
+        }
+      }
+      else
+      {
+        this.$swal.fire({
+            icon: 'error',
+            title: this.$t('login_auth_error')             
+        })
+
+        this.isResister = false;
+        this.$router.replace('/login');
+      }
+    },
     data: () => ({
+      user : {},
       items: [
         {
           icon: 'mdi-view-dashboard',
@@ -154,7 +182,7 @@
       },
       profile () {
         return {
-          avatar: true,
+          avatar: false,
           title: this.$t('avatar'),
         }
       },

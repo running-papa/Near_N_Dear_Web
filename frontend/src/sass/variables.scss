@@ -29,8 +29,27 @@ $headings: (
     'size': 1.125rem,
     'line-height': 1.4em
   ),
-  'h5': ( 'size': 1.0625rem ),
-  'h6': ( 'size': .75rem ),
-  'subtitle-2': ( 'size': 1rem ),
-  'overline': ( 'letter-spacing': 0 )
+  // 'h5': ( 'size': 1.0625rem ),
+  // 'h6': ( 'size': .75rem ),
+  // 'subtitle-2': ( 'size': 1rem ),
+  'overline': ( 'letter-spacing': 0 ),
+  'h5': (
+    'letter-spacing': 0.1875rem,
+    'weight': 700
+  ),
+  'h6': (
+    'letter-spacing': 0.1875rem,
+    'size': 1rem,
+    'weight': 700
+  ),
+  'subtitle-1': (
+    'size': .9375rem,
+    'letter-spacing': 0.1875rem,
+  ),
+  'subtitle-2': (
+    'letter-spacing': 0.1875rem,
+  ),
+  'body-1': (
+    'size': .9375rem,
+  )
 );

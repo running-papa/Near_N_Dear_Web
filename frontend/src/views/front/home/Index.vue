@@ -16,6 +16,8 @@ export default {
   mixins: [
     LoadSections([
       "hero",
+      "hero2",
+      "hero3",
       "theme-features",
       // 'features',
       // 'contact-us',

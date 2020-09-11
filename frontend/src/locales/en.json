@@ -1,4 +1,65 @@
 {
+  "home":"Home",
+  "about":"About",
+  "contact":"Contact",
+  "login":"Login",
+
+  "Front Home":"------------------front Home-----------------------",
+  "home_text_main":"For settling in Canada",
+  "home_text_sub":"Experience the new Near N Dear.",
+
+  "home_text_search_home":"Searching for a house",
+  "home_text_search_sub1":"Near N Dear, Canada's largest real estate agent",
+  "home_text_search_sub2":"Provide free English professional services for home purchase.",
+
+  "home_text_search_car":"vehicle purchase",
+  "home_text_search_car_sub1":"Are you having trouble purchasing a car?",
+  "home_text_search_car_sub2":"Use Near N Dear's professional English service.",
+  "home_text_search_car_sub3":"It's free.",
+
+  "features":"an innovative system that helps everyone who wants to immigrate.",
+  "features_title1":"Choose the house you want to live in.",
+  "features_title2":"Choose the car you want to buy.",
+  "features_title3":"Do you need a new cell phone?",
+  "features_title4":"Professional English service required for purchase is free.",
+
+  "affiliates" : "partner company",
+  "info_title" :"immigration settlement service",
+  "info_title_sub" :"Just choose the services you need for your home, car, and cell phone. All services are free.",
+
+  "Front about":"------------------front about-----------------------",
+  "about_product_title" :"service information",
+  "about_product_card_title1" :"house purchase",
+  "about_product_card_title1_sub" :"Professional English translation service required for purchase",
+  "about_product_card_title1_text" :"Our service provides professional English service that customers need to choose a house and connect and purchase their favorite house with a realtor as if they were buying a product in a shopping mall.",
+
+  "about_product_card_title2" :"vehicle purchase",
+  "about_product_card_title2_sub" :"Professional English translation service with local dealers",
+  "about_product_card_title2_text" :"Our service provides the customer with the vehicle selection and professional English service required for purchase with local dealers.",
+
+  "about_product_card_title3" :"The latest mobile phone internet purchasing service",
+  "about_product_card_title3_sub" :"Self-licensing",
+  "about_product_card_title3_text" :"Self-licensing provides customers with an opportunity to sell cheaper mobile phones on the Internet.",
+
+  "Front Contact":"------------------front Contact-----------------------",
+  "business_title" :"Please cooperate with us.",
+  "business_sub" :"We are looking for real estate across Canada and used car dealers across Canada. If you cooperate with us, you'll get lower fees and more sales opportunities. Please contact us.",
+  "mail_us":"MAIL US YOUR MESSAGE",
+  "mail_send":"Send message",
+
+  "Front Login":"------------------front Login-----------------------",
+  "login_title":"Login",
+  "login_register":"Register",
+  "login_login":"Login",
+
+  "register_title":"Register",
+  "register_dealer":"Dealer",
+  "register_landing":"Landing serve",
+  "register_login":"Login?",
+  "register_register":"Register",
+
+  "back ":"------------------back Login-----------------------",
+  
   "avatar": "jyp",
   "buttons": "Buttons",
   "calendar": "Calendar",
@@ -17,7 +78,7 @@
   "grid": "Grid System",
   "icons": "Icons",
   "lock": "Lock Screen Page",
-  "login": "Login Page",
+  
   "maps": "Maps",
   "multi": "Multi Level Collapse",
   "notifications": "Notifications",
@@ -41,5 +102,14 @@
   "user": "User Profile",
   "vforms": "Validation Forms",
   "widgets": "Widgets",
-  "wizard": "Wizard"
+  "wizard": "Wizard",
+  "type_dealer" : "Dealer는 집,차량,핸드폰 딜러입니다.",
+  "type_landing serve" : "Landing serve는 전문영어 서비스원 입니다.",
+  "login_auth_error" : "인증정보가 유효하지 않습니다. 로그인 화면으로 돌아갑니다.",
+  "login_success" : "환영합니다.",
+  "register_success" : "회원가입 완료",
+  "register_validator_null" : "모든 입력을 확인하세요!",
+  "register_validator_pw_confirm" : "비밀번호가 동일하지 않습니다.",
+  "register_validator_pw_length" : "비밀번호는 6자 이상 15자 이하 입니다."
+
 }

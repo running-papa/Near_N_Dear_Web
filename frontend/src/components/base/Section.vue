@@ -33,6 +33,7 @@
         return {
           ...this.measurableStyles,
           padding: `${space}px 0`,
+          background:'#FFF',
         }
       },
     },

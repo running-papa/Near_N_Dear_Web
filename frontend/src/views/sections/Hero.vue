@@ -1,16 +1,16 @@
 <template>
   <section id="hero">
     <v-img
-      :min-height="minHeight"
+      :height="$vuetify.breakpoint.mdAndUp ? 800 : 350"
       :src="require('@/assets/bg_1.jpg')"
       class="white--text"
-      gradient="to right, rgba(5, 11, 31, .8), rgba(5, 11, 31, .8)"
+      gradient="to right, rgba(5, 11, 31, .4), rgba(5, 11, 31, .4)"
     >
       <v-container class="fill-height px-4 py-8">
         <v-responsive class="d-flex align-center" height="100%" max-width="700" width="100%">
-          <base-heading title="캐나다 정착을 위한" />
+          <base-heading :title="this.$t('home_text_main')" size="display-4" />
 
-          <base-body>새로워진 Near N Dear 를 경험 해보세요.</base-body>
+          <base-body>{{$t('home_text_sub')}}</base-body>
 
           <div
             :class="$vuetify.breakpoint.smAndDown ? 'flex-column align-start' : 'align-center'"
@@ -48,8 +48,8 @@ export default {
 
   computed: {
     minHeight() {
-      const height = this.$vuetify.breakpoint.mdAndUp ? "100vh" : "50vh";
-
+      const height = this.$vuetify.breakpoint.mdAndUp ? "40vh" : "40vh";
+      
       return `calc(${height} - ${this.$vuetify.application.top}px)`;
     },
   },

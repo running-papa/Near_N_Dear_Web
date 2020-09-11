@@ -1,7 +1,7 @@
 <template>
   <base-section id="affiliates" class="grey lighten-4" space="36">
     <v-container>
-      <base-section-heading title="협력사" />
+      <base-section-heading :title="$t('affiliates')" />
 
       <v-slide-group>
         <template v-for="n in 6">

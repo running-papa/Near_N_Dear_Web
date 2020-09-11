@@ -53,16 +53,9 @@
 
     <div class="mx-3" />
 
-    <v-btn
-      class="ml-2"
-      min-width="0"
-      text
-      to="/"
-    >
-      <v-icon>mdi-home</v-icon>
-    </v-btn>
+    
 
-    <v-menu
+    <!-- <v-menu
       bottom
       left
       offset-y
@@ -104,7 +97,26 @@
           </app-bar-item>
         </div>
       </v-list>
-    </v-menu>
+    </v-menu> -->
+    <v-btn
+      class="ml-2"
+      min-width="0"
+      text
+      to="/"
+    >
+     <base-img
+        :src="require('@/assets/logo.png')"
+        max-width="40"
+      />
+    </v-btn>
+    <v-btn
+      class="ml-2"
+      min-width="0"
+      text
+      to="/page/dashboard"
+    >
+      <v-icon>mdi-home</v-icon>
+    </v-btn>
 
     <v-btn
       class="ml-2"
@@ -113,7 +125,18 @@
       to="/page/user"
     >
       <v-icon>mdi-account</v-icon>
+      
     </v-btn>
+    <v-btn
+      class="ml-2"
+      min-width="0"
+      text
+      @click="LogOut()"
+    >
+      <v-icon>mdi-logout</v-icon>
+      
+    </v-btn>
+    
   </v-app-bar>
 </template>
 
@@ -178,6 +201,13 @@
       ...mapMutations({
         setDrawer: 'SET_DRAWER',
       }),
+      LogOut(){
+        
+        this.$store.dispatch("LOGOUT").then(() => this.redirect())
+      },
+      redirect() {
+        this.$router.replace('/');
+      }
     },
   }
 </script>

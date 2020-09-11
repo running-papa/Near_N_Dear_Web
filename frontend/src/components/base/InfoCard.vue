@@ -7,9 +7,9 @@
         </v-col>
 
         <v-col v-if="title || subtitle" :cols="callout ? 9 : 12">
-          <base-subtitle v-if="subtitle" :title="subtitle" space="1" />
+          <base-subtitle v-if="subtitle" :title="subtitle" space="3" />
 
-          <base-title :title="title" class="text-uppercase" space="1" />
+          <base-title :title="title" class="text-uppercase" space="3" />
 
           <base-divider :color="color" />
 
@@ -19,7 +19,7 @@
         </v-col>
 
         <v-col v-if="callout" cols="2">
-          <div class="display-3 grey--text text--lighten-4 font-weight-bold pr-8" v-text="callout" />
+          <div class="display-4 black--text text--lighten-4 font-weight-bold pr-8" v-text="callout" />
         </v-col>
       </v-row>
     </v-container>

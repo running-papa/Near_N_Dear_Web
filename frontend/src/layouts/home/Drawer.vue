@@ -4,7 +4,7 @@
     color="transparent"
     fixed
     height="auto"
-    overlay-color="secondary"
+    overlay-color="success"
     overlay-opacity=".8"
     temporary
     v-bind="$attrs"

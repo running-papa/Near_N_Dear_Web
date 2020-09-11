@@ -8,15 +8,7 @@
         max-width="140"
         width="100%"
       />
-
-      <!-- <base-img
-        :src="require('@/assets/zero-logo-light.svg')"
-        contain
-        max-width="128"
-        width="100%"
-      />-->
-      <!-- <base-heading title="GETCA" /> -->
-
+      
       <v-spacer />
 
       <div>
@@ -28,11 +20,36 @@
             :exact="name === 'Home'"
             :ripple="false"
             active-class="text--primary"
-            class="font-weight-bold"
+            class="font-weight-bold" 
             min-width="96"
             text
           >{{ name }}</v-tab>
+          <v-cols cols="auto">
+          <v-select
+                :items="['English', 'Korean', 'French', 'Chinese(Simplified)', 'Chinese(Traditional)']"
+                label="Languege"
+                height=45
+                autowidth
+                dense
+              >
+              <template v-slot:item="{ item, attrs, on }">
+                <v-list-item
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="changeLanguege(item)"
+                >
+                  <v-list-item-title
+                    :id="attrs['aria-labelledby']"
+                    v-text="item"
+                   
+                  ></v-list-item-title>
+                </v-list-item>
+              </template>
+            </v-select>
+            </v-cols>
         </v-tabs>
+        
+        
       </div>
 
       <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawer = !drawer" />
@@ -53,9 +70,39 @@ export default {
   data: () => ({
     drawer: null,
     items: ["Home", "About", "Contact", "Login"],
+    //items: [],
+   
   }),
 
-  created() {},
+  created() {
+    // let home = this.$t('home');
+    // let about = this.$t('about');
+    // let contact = this.$t('contact');
+    // let login = this.$t('login');
+    
+    // this.items = [home,about,contact,login];
+  },
+  methods:{
+    changeLanguege(type){
+      let local = '';
+
+      if(type == 'English')
+        local = 'en'
+      else if(type == 'Korean')
+        local = 'ko'
+      else if(type == 'French')
+        local = 'fr'
+      else if(type == 'Chinese(Simplified)')
+        local = 'zhHans'  //중국어 간체
+      else if(type == 'Chinese(Traditional)')
+        local = 'zhHant' //중국어 번체
+      else
+        local = 'en'
+
+
+      this.$i18n.locale = local;  
+    }
+  }
 };
 </script>
 
@@ -68,4 +115,10 @@ export default {
     .v-tab
       &::before
         display: none
+
+  .v-select__selections input  
+    width: 55px
+  
+  
+  
 </style>

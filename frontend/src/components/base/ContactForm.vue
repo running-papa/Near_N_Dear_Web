@@ -1,7 +1,7 @@
 <template>
   <div>
     <base-info-card
-      :title="title"
+      :title="$t('mail_us')"
       :subtitle="subtitle"
       space="4"
       color="primary"
@@ -19,12 +19,12 @@
     />
 
     <base-btn
-      :color="!theme.isDark ? 'accent' : 'white'"
+      :color="!theme.isDark ? 'primary' : 'white'"
       href="mailto:shop@vuetifyjs.com?subject=Zero%20Theme%20Question"
       outlined
       target="_blank"
     >
-      Send message
+      {{$t('mail_send')}}
     </base-btn>
   </div>
 </template>
