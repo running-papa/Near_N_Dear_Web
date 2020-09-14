@@ -1,24 +1,26 @@
 <template>
 <section id="login">
   <v-img
-    :height="$vuetify.breakpoint.mdAndUp ? 1024 : 550"
+    :height="$vuetify.breakpoint.mdAndUp ? 1024 : 800"
     :src="require('@/assets/login.jpg')"
     class="white--text"
     gradient="to right, rgba(5, 11, 31, .6), rgba(5, 11, 31, .6)"
   >
-    <v-container class="fill-height"> 
-      <v-row
-        align="center"
+    <v-container > 
+      <v-row     
+        align="start"
         justify="center"
+        
       >
         <v-col
           cols="6"
-          md="4"
+          md="6"
         >
           <base-material-card
             color="primary"
             class="px-3 py-5"
             v-if="isResister==false"
+            
           >
             <template v-slot:heading>
               <div class="display-2 text-center">
@@ -80,7 +82,7 @@
                   </v-row>
                   <v-text-field
                     label="e-mail"
-                    name="login"
+                    name="email"
                     prepend-icon="mdi-account"
                     type="text"
                     color="info"
@@ -118,22 +120,43 @@
                     maxlength="15"
                   />
                 </v-form>
-                <v-card-actions>
-                  
+                <v-row justify="center">
+                  <base-body space="5" justify="center">
+                  {{$t('register_privacy_text1')}}
+                  <v-btn text small color="info" @click="showmodal('privacy')">{{$t('register_privacy')}}</v-btn> 
+                  {{$t('register_privacy_text2')}}
+                  <v-btn text small color="info" @click="showmodal('term')">{{$t('register_term')}}</v-btn> 
+                  {{$t('register_privacy_text3')}}
+                  </base-body>
+                </v-row>
+                <v-card-actions>  
                   <v-btn text color="info" @click="changeRegister(false)">{{$t('register_login')}}</v-btn>
                   <v-spacer />
                   <v-btn color="info" @click="Register()">{{$t('register_register')}}</v-btn>
                 </v-card-actions>
+               
               </v-card-text>
           </base-material-card>
         </v-col>
       </v-row>
+
+      <v-dialog v-model="dialog_Privacy" width="600px">
+        <Privacy v-on:closemodal="closemodal"></Privacy>
+        
+      </v-dialog>
+      <v-dialog v-model="dialog_TermsofUse" width="600px">
+        <TermsofUse v-on:closemodal="closemodal"></TermsofUse>
+      </v-dialog>
     </v-container>
   </v-img>
+  
 </section>
 </template>
-
+ jh
 <script>
+import TermsofUse from "./TermsofUse";
+import Privacy from "./Privacy";
+
   export default {
     name: 'Login',
     data() {
@@ -153,12 +176,19 @@
         user:{},
         
         types:['Dealer','Landing serve'],
+        dialog_Privacy:false,
+        dialog_TermsofUse:false,
+
       }
     },
     props: {
       source: String,
     },
-   mounted() {
+    components: {
+      TermsofUse,
+      Privacy
+    },
+    mounted() {
       
       if ( this.$store.state.accessToken != null && this.$store.state.user != null)
       {
@@ -167,7 +197,20 @@
       }
     },
     methods:{
-
+      showmodal(type){
+        if (type == 'privacy')
+        {
+          this.dialog_Privacy = true;
+        }
+        else
+        {
+          this.dialog_TermsofUse = true;
+        }
+      },
+      closemodal(){
+        this.dialog_Privacy = false;
+        this.dialog_TermsofUse = false;
+      },
       Login(){
         if (this.validator('login') == false)
           return;

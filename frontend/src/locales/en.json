@@ -58,8 +58,14 @@
   "register_login":"Login?",
   "register_register":"Register",
 
+  "register_privacy":"Privacy Policy",
+  "register_term":"Terms of Use",
+  "register_privacy_text1":"register as a member at the",
+  "register_privacy_text2":"and",
+  "register_privacy_text3":"agree.",
+
   "back ":"------------------back Login-----------------------",
-  
+
   "avatar": "jyp",
   "buttons": "Buttons",
   "calendar": "Calendar",
