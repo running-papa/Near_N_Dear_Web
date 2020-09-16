@@ -62,6 +62,13 @@ const router = new Router({
           name: 'Dashboard',
           component: () => import('@/views/back/Dashboard.vue'),
         },
+        {
+          path: 'mypage',
+          name: 'Mypage',
+          component: () => import('@/views/back/Mypage.vue'),
+        },
+        //예제  ---------------------------------------------
+        //예제  ---------------------------------------------
         // Pages
         {
           name: 'User Profile',
@@ -101,6 +108,7 @@ const router = new Router({
           path: 'upgrade',
           component: () => import('@/views/back/Upgrade'),
         },
+        //예제  ---------------------------------------------
       ],
     }
     

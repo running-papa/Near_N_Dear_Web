@@ -32,7 +32,7 @@ class AuthController extends Controller {
         {
             return response()->json([
                     'status' => 'error',
-                    'messages'   => '아이디와 비밀번호를 확인하세요.'
+                    'messages'   => 'error_check_id_pwd'
             ]); 
         }
 
@@ -58,8 +58,6 @@ class AuthController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function register(Request $request) {
-        
-        
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
@@ -85,6 +83,33 @@ class AuthController extends Controller {
         ], 201);
     }
 
+    public function update(Request $request) {
+        
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|between:2,100',
+            'password' => 'required|string|confirmed|min:6',
+            'user_level' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                        'status' => 'error',
+                        'messages' => $validator->errors(),
+                    ], 400);
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        $user->fill($request->all());
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        
+        return response()->json([
+            'message' => 'success_update',
+            'user' => $user
+        ], 201);
+    }
 
     /**
      * Log the user out (Invalidate the token).

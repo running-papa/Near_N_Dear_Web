@@ -30,7 +30,7 @@
             <v-card-text>
                 <v-form>
                   <v-text-field
-                    label="e-mail"
+                    :label="$t('register_email')"
                     name="login"
                     prepend-icon="mdi-account"
                     type="text"
@@ -39,7 +39,7 @@
 
                   <v-text-field
                     id="password"
-                    label="Password"
+                    :label="$t('register_password')"
                     name="password"
                     prepend-icon="mdi-lock"
                     type="password"
@@ -81,7 +81,7 @@
                     </v-radio-group>
                   </v-row>
                   <v-text-field
-                    label="e-mail"
+                    :label="$t('register_email')"
                     name="email"
                     prepend-icon="mdi-account"
                     type="text"
@@ -90,7 +90,7 @@
                   />
                   <v-text-field
                     id="name"
-                    label="name"
+                    :label="$t('register_name')"
                     name="name"
                     prepend-icon="mdi-face"
                     type="text"
@@ -99,7 +99,7 @@
                   />
                   <v-text-field
                     id="password"
-                    label="Password"
+                    :label="$t('register_password')"
                     name="password"
                     prepend-icon="mdi-lock"
                     type="password"
@@ -110,7 +110,7 @@
                   />
                   <v-text-field
                     id="password_confirm"
-                    label="password_confirmation"
+                    :label="$t('register_password_confirmation')"
                     name="password_confirmation"
                     prepend-icon="mdi-lock"
                     type="password"
@@ -140,11 +140,11 @@
         </v-col>
       </v-row>
 
-      <v-dialog v-model="dialog_Privacy" width="600px">
+      <v-dialog v-if="this.$vuetify.breakpoint.width > this.mobileBreakPoint? modal_width='800px' : modal_width='300px'" v-model="dialog_Privacy" :width="modal_width">
         <Privacy v-on:closemodal="closemodal"></Privacy>
         
       </v-dialog>
-      <v-dialog v-model="dialog_TermsofUse" width="600px">
+      <v-dialog v-if="this.$vuetify.breakpoint.width > this.mobileBreakPoint? modal_width='800px' : modal_width='300px'" v-model="dialog_TermsofUse" :width="modal_width">
         <TermsofUse v-on:closemodal="closemodal"></TermsofUse>
       </v-dialog>
     </v-container>
@@ -161,6 +161,8 @@ import Privacy from "./Privacy";
     name: 'Login',
     data() {
       return {
+        mobileBreakPoint:768,
+        modal_width:'',
         isResister : false,
         user_login : {
           email: '',
@@ -226,9 +228,11 @@ import Privacy from "./Privacy";
           
           if ( response.data.status == 'error')
           {
+              
+              
               this.$swal.fire({
                 icon: 'error',
-                title: response.data.messages,              
+                title: this.$t( response.data.messages),              
               })
               return;
           }

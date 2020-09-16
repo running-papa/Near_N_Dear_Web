@@ -103,26 +103,26 @@
       {
         this.user = this.$store.getters.getUser;
 
-        if ( this.user == null )
-        {
-           this.$swal.fire({
-            icon: 'error',
-            title: this.$t('login_auth_error')             
-            })
-            this.isResister = false;
-            this.$router.replace('/login');
-            return;
-        }
+        // if ( this.user == null )
+        // {
+        //    this.$swal.fire({
+        //     icon: 'error',
+        //     title: this.$t('login_auth_error')             
+        //     })
+        //     this.isResister = false;
+        //     this.$router.replace('/login');
+        //     return;
+        // }
       }
       else
       {
-        this.$swal.fire({
-            icon: 'error',
-            title: this.$t('login_auth_error')             
-        })
+        // this.$swal.fire({
+        //     icon: 'error',
+        //     title: this.$t('login_auth_error')             
+        // })
 
-        this.isResister = false;
-        this.$router.replace('/login');
+        // this.isResister = false;
+        // this.$router.replace('/login');
       }
     },
     data: () => ({
@@ -162,6 +162,12 @@
           title: 'google',
           icon: 'mdi-map-marker',
           to: '/page/maps/google-maps',
+        },
+        {
+          title: 'My Page',
+          icon: 'mdi-account',
+          to: '/page/mypage',
+          
         },
         
       ],

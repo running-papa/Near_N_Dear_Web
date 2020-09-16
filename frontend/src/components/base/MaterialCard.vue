@@ -3,6 +3,7 @@
     v-bind="$attrs"
     :class="classes"
     class="v-card--material pa-3"
+    :height="height"
   >
     <div class="d-flex grow flex-wrap">
       <v-avatar
@@ -115,12 +116,17 @@
         type: String,
         default: '',
       },
+      height: {
+        type: String,
+        default: '',
+      },
     },
 
     computed: {
       classes () {
         return {
           'v-card--material--has-heading': this.hasHeading,
+          
         }
       },
       hasHeading () {
@@ -145,4 +151,7 @@
       top: -40px
       transition: .3s ease
       z-index: 1
+
+  .scroll
+    overflow-y:scrll
 </style>

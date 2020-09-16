@@ -19,7 +19,7 @@ export default new Vuex.Store({
     barImage: 'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-1.jpg',
     drawer: null,
     accessToken: null,
-    user:null,
+    user:{},
   },
   getters: { 
     getAuthHeader(state) { 
@@ -54,7 +54,12 @@ export default new Vuex.Store({
 
       // 토큰을 로컬 스토리지에 저장
       localStorage.accessToken = state.accessToken
-      localStorage.user =  state.user
+      localStorage.user =  JSON.stringify(data.user)
+    },
+    UPDATE(state, data) {
+      state.user = data.user
+      localStorage.removeItem('user')
+      localStorage.setItem('user', JSON.stringify(data.user))
     },
     LOGOUT(state) {
       state.accessToken = null

@@ -24,11 +24,11 @@
             min-width="96"
             text
           >{{ name }}</v-tab>
-          <v-cols cols="auto">
+          <v-col cols="auto">
           <v-select
                 :items="['English', 'Korean', 'French', 'Chinese(Simplified)', 'Chinese(Traditional)']"
                 label="Languege"
-                height=45
+                height=20
                 autowidth
                 dense
               >
@@ -46,7 +46,7 @@
                 </v-list-item>
               </template>
             </v-select>
-            </v-cols>
+            </v-col>
         </v-tabs>
         
         
