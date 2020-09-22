@@ -124,55 +124,21 @@
         // this.isResister = false;
         // this.$router.replace('/login');
       }
+      
+      this.drawer_menu();
     },
+    
+
     data: () => ({
       user : {},
-      items: [
-        {
-          icon: 'mdi-view-dashboard',
-          title: 'dashboard',
-          to: '/page/dashboard',
-        },
-        {
-          icon: 'mdi-account',
-          title: 'user',
-          to: '/page/user',
-        },
-        {
-          title: 'rtables',
-          icon: 'mdi-clipboard-outline',
-          to: '/page/tables/regular-tables',
-        },
-        {
-          title: 'typography',
-          icon: 'mdi-format-font',
-          to: '/page/components/typography',
-        },
-        {
-          title: 'icons',
-          icon: 'mdi-chart-bubble',
-          to: '/page/components/icons',
-        },
-        {
-          title: 'notifications',
-          icon: 'mdi-bell',
-          to: '/page/components/notifications',
-        },
-        {
-          title: 'google',
-          icon: 'mdi-map-marker',
-          to: '/page/maps/google-maps',
-        },
-        {
-          title: 'My Page',
-          icon: 'mdi-account',
-          to: '/page/mypage',
-          
-        },
-        
-      ],
+      dealer_menu :{
+        realestate : '',
+        vehicle:'',
+        mypage:'',
+      },
+      items: [],
     }),
-
+      
     computed: {
       ...mapState(['barColor', 'barImage']),
       drawer: {
@@ -203,6 +169,65 @@
           //title: item.title,
         }
       },
+      drawer_menu(){
+        this.dealer_menu.realestate = this.$t('Realestate');
+        this.dealer_menu.vehicle = this.$t('Vehicle');
+        this.dealer_menu.mypage = this.$t('mypage');
+      
+        this.items = [
+            {
+              title: 'dashboard',
+              icon: 'mdi-view-dashboard',
+              to: '/page/dashboard',
+            },
+            {
+              title: this.dealer_menu.realestate,//,
+              icon: 'mdi-home-map-marker',
+              to: '/page/Realestate_list', 
+            },
+            {
+              title: this.dealer_menu.vehicle,//this.$t('Vehicle'),
+              icon: 'mdi-car',
+              to: '/page/Vehicle_registration', 
+            },
+            {
+              title: this.dealer_menu.mypage,//this.$t('mypage'),
+              icon: 'mdi-account',
+              to: '/page/mypage', 
+            },
+            //예제
+            {
+              icon: 'mdi-account',
+              title: 'user',
+              to: '/page/user',
+            },
+            {
+              title: 'rtables',
+              icon: 'mdi-clipboard-outline',
+              to: '/page/tables/regular-tables',
+            },
+            {
+              title: 'typography',
+              icon: 'mdi-format-font',
+              to: '/page/components/typography',
+            },
+            {
+              title: 'icons',
+              icon: 'mdi-chart-bubble',
+              to: '/page/components/icons',
+            },
+            {
+              title: 'notifications',
+              icon: 'mdi-bell',
+              to: '/page/components/notifications',
+            },
+            {
+              title: 'google',
+              icon: 'mdi-map-marker',
+              to: '/page/maps/google-maps',
+            },
+          ]
+      }
     },
   }
 </script>

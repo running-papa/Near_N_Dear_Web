@@ -26,4 +26,5 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('update', 'AuthController@update');
     Route::get('user-profile', 'AuthController@userProfile');
+    Route::post('getRealestate', 'RealestateController@show');
 });

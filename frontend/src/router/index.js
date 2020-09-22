@@ -63,11 +63,26 @@ const router = new Router({
           component: () => import('@/views/back/Dashboard.vue'),
         },
         {
+          path: 'Realestate_list',
+          name: 'Realestate_list',
+          component: () => import('@/views/back/Realestate_list.vue'),
+        },
+        {
+          path: 'Realestate_create',
+          name: 'Realestate_create',
+          component: () => import('@/views/back/Realestate_create.vue'),
+        },
+        {
+          path: 'Vehicle_registration',
+          name: 'Vehicle_registration',
+          component: () => import('@/views/back/Vehicle_registration.vue'),
+        },
+        {
           path: 'mypage',
           name: 'Mypage',
           component: () => import('@/views/back/Mypage.vue'),
         },
-        //예제  ---------------------------------------------
+        
         //예제  ---------------------------------------------
         // Pages
         {

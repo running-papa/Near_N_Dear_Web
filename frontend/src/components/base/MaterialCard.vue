@@ -27,52 +27,34 @@
         class="text-start v-card--material__heading mb-n6"
         dark
       >
-        <slot
-          v-if="$slots.heading"
-          name="heading"
-        />
+        <slot v-if="$slots.heading" name="heading"/>
+        <slot v-else-if="$slots.image" name="image"/>
+        <div v-else-if="title && !icon" class="display-1 font-weight-light" v-text="title"/>
+        <v-icon v-else-if="icon" size="32" v-text="icon"/>
 
-        <slot
-          v-else-if="$slots.image"
-          name="image"
-        />
-
-        <div
-          v-else-if="title && !icon"
-          class="display-1 font-weight-light"
-          v-text="title"
-        />
-
-        <v-icon
-          v-else-if="icon"
-          size="32"
-          v-text="icon"
-        />
-
-        <div
-          v-if="text"
-          class="headline font-weight-thin"
-          v-text="text"
-        />
+        <div v-if="text" class="headline font-weight-thin" v-text="text"/>
       </v-sheet>
 
-      <div
-        v-if="$slots['after-heading']"
-        class="ml-6"
-      >
+      <div v-if="$slots['after-heading']" class="ml-6">
         <slot name="after-heading" />
       </div>
-
-      <div
-        v-else-if="icon && title"
-        class="ml-4"
-      >
-        <div
-
-          class="card-title font-weight-light"
-          v-text="title"
-        />
+      <div v-else-if="icon && title" class="ml-4 row">
+        <div class="card-title font-weight-light" v-text="title"/>
+        <v-text-field
+            v-if="search"
+            class="search_bar"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>  
       </div>
+      <v-spacer/>
+
+      <v-btn v-if="addicon" depressed class="mb-2" dark  :color="color" @click="additem()">
+       <v-icon>{{addicon}}</v-icon>
+      </v-btn>
+          
     </div>
 
     <slot />
@@ -101,6 +83,14 @@
         default: 'success',
       },
       icon: {
+        type: String,
+        default: undefined,
+      },
+      addicon: {
+        type: String,
+        default: undefined,
+      },
+      search:{
         type: String,
         default: undefined,
       },
@@ -136,6 +126,11 @@
         return Boolean(this.$slots.heading || (this.title && this.icon))
       },
     },
+    methods:{
+      additem(){
+        this.$emit('additem')
+      } 
+    }
   }
 </script>
 
@@ -152,6 +147,9 @@
       transition: .3s ease
       z-index: 1
 
-  .scroll
-    overflow-y:scrll
+  .search_bar
+    margin-top: -10px
+    margin-bottom: 0px
+    margin-left: 80px
+  
 </style>

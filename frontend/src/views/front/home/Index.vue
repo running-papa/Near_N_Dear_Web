@@ -18,6 +18,7 @@ export default {
       "hero",
       "hero2",
       "hero3",
+      "hero4",
       "theme-features",
       // 'features',
       // 'contact-us',

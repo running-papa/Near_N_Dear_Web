@@ -1,0 +1,166 @@
+<template>
+  <v-container
+    id="Realestate_list"
+    fluid
+    tag="section"
+  >
+    <base-v-component
+      :heading="$t('Realestate_title')"
+      link="components/simple-tables"
+    />
+
+    <v-card>
+    <v-card-title>
+      <v-btn depressed class="mb-2" color="success" fab dark>
+        <v-icon  size="32" >{{"mdi-clipboard-text"}}</v-icon>
+      </v-btn>   
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+      <v-btn depressed class="mb-2"  @click="additem()" color="success" fab dark>
+       <v-icon>{{"mdi-plus"}}</v-icon>
+      </v-btn>
+    </v-card-title>
+    <v-data-table
+      dense 
+      :headers="headers"
+      :items="realestate"
+      :search="search"
+      :loading="loading"
+       class="elevation-1"
+    ></v-data-table>
+    
+  
+  </v-card>
+  </v-container>
+</template>
+
+<script>
+
+  export default {
+    name: 'Realestate_list',
+    data () {
+      return {
+        search: '',
+        realestate:[], //현재페이지 매물
+        loading: false,
+        user:[],
+
+        headers: [
+          {
+            text: '매물번호',
+            align: 'start',
+            sortable: false,
+            value: 'uuid',
+            
+          },
+          { text: '공개', value: 'public' },
+          { text: '매매타입', value: 'price_type' },
+          { text: '가격', value: 'price' },
+          { text: '제목', value: 'subject' },
+          { text: '도로번호', value: 'street_number' },
+          { text: '도로이름', value: 'street_name' },
+          { text: '도시', value: 'city' },
+          { text: '주', value: 'province' },
+          { text: '나라', value: 'country' },
+          { text: '조회수', value: 'view' },
+        ],
+        realestate: [
+          {
+            uuid: '',
+            public: '',
+            price_type: '',
+            price: '',
+            subject: '',
+            street_number: '',
+            street_name: '',
+            city: '',
+            province: '',
+            country: '',
+            view: '',
+          },
+          
+        ],
+      }
+    },
+
+    mounted() {
+      this.user = JSON.parse(localStorage.getItem('user'))
+      if(this.user == null) {
+        this.$swal.fire({
+            icon: 'error',
+            title: this.$t('login_auth_error')             
+        })
+        this.$router.replace('/login');
+      }
+
+      //리스트 헤더 셋팅
+      this.setHeaders()
+
+      //매물데이터 가져오기
+      this.getDataFromApi()
+
+    },
+    methods:{
+      setHeaders(){
+         this.headers =  [
+          {
+            text: this.$t('header_uuid'),
+            align: 'start',
+            sortable: false,
+            value: 'uuid',
+          },
+          { text: this.$t('header_public'), value: 'public' },
+          { text: this.$t('header_price_type'), value: 'price_type' },
+          { text: this.$t('header_price'), value: 'price' },
+          { text: this.$t('header_subject'), value: 'subject' },
+          { text: this.$t('header_street_number'), value: 'street_number' },
+          { text: this.$t('header_street_name'), value: 'street_name' },
+          { text: this.$t('header_city'), value: 'city' },
+          { text: this.$t('header_province'), value: 'province' },
+          { text: this.$t('header_country'), value: 'country' },
+          { text: this.$t('header_view'), value: 'view' },
+        ]
+      },
+      getDataFromApi(){
+        this.loading = true;
+        const frm = new FormData()
+        frm.append('dealer_email', this.user.email);
+
+        this.$http.post('/api/auth/getRealestate', frm).then((response) => {
+          
+          if ( response.data.status == 'error')
+          {
+              this.$swal.fire({
+                icon: 'error',
+                title: this.$t( response.data.messages),              
+              })
+              this.loading = false;
+              return;
+          }
+          else
+          {
+            this.realestate = response.data;
+            this.loading = false;
+          }    
+        }).catch(error => {
+          console.log(error.response)
+           this.$swal.fire({
+                icon: 'error',
+                title: error.response.data.messages,              
+            })
+            this.loading = false;
+            return;
+        });
+      },
+      additem(){
+        this.$router.replace('/page/Realestate_create');
+      }
+    }
+  }
+</script>
