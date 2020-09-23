@@ -58,7 +58,6 @@
               placeholder="Pick an avatar"
               prepend-icon="mdi-camera"
               :id="n+''"
-              @change="previewFiles"
               show-size
               ></v-file-input>
               </v-col>
@@ -69,7 +68,6 @@
                 placeholder="Pick an avatar"
                 prepend-icon="mdi-camera"
                 :id="n+5+''"
-                @change="previewFiles"
                 show-size
                 ></v-file-input>
               </v-col>
@@ -100,9 +98,11 @@
 <script>
 
   export default {
+    props:['uuid'],
     name:'ImageUpload',
     data () {
       return {
+        uuid:'',
         rules: [value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',],
         image:[],
         colors: [
@@ -131,8 +131,7 @@
         ],
       }
     },
- 
-
+   
     mounted() {
       this.user = JSON.parse(localStorage.getItem('user'))
       if(this.user == null) {
@@ -148,8 +147,16 @@
 
     },
     methods:{
-      previewFiles(event) {
-       
+      update() {
+        if ( this.uuid == null || this.uuid == "")
+        {
+           this.$swal.fire({
+                icon: 'error',
+                title: '매물을 먼저 등록해주세요',              
+            })
+          return;
+        }
+        
       }
     }
   }

@@ -18,28 +18,29 @@
 
   <v-row cols="12">
     <v-col cols="6" >
-        <v-switch class="ma-2" :label="$t('pet')"></v-switch>
-        <v-switch class="ma-2" :label="$t('internet')"></v-switch>
-        <v-switch class="ma-2" :label="$t('snow_removal')"></v-switch>
-        <v-switch class="ma-2" :label="$t('laundry')"></v-switch>
-        <v-switch class="ma-2" :label="$t('dryer')"></v-switch>
-        <v-switch class="ma-2" :label="$t('heation')"></v-switch>
-        <v-switch class="ma-2" :label="$t('cooling')"></v-switch>
-        <v-switch class="ma-2" :label="$t('refrigerator')"></v-switch>
+        <v-switch class="ma-2" :label="$t('pet')"               v-model="option.pet"></v-switch>
+        <v-switch class="ma-2" :label="$t('internet')"          v-model="option.internet"></v-switch>
+        <v-switch class="ma-2" :label="$t('snow_removal')"      v-model="option.snow_removal"></v-switch>
+        <v-switch class="ma-2" :label="$t('laundry')"           v-model="option.laundry"></v-switch>
+        <v-switch class="ma-2" :label="$t('dryer')"             v-model="option.dryer"></v-switch>
+        <v-switch class="ma-2" :label="$t('heating')"           v-model="option.heation"></v-switch>
+        <v-switch class="ma-2" :label="$t('cooling')"           v-model="option.cooling"></v-switch>
+        <v-switch class="ma-2" :label="$t('refrigerator')"      v-model="option.refrigerator"></v-switch>
     </v-col>
     <v-col cols="6" >
-        <v-switch class="ma-2" :label="$t('dishwasher')"></v-switch>
-        <v-switch class="ma-2" :label="$t('oven')"></v-switch>
-        <v-switch class="ma-2" :label="$t('full_fumiture')"></v-switch>
-        <v-switch class="ma-2" :label="$t('Amenities')"></v-switch>
-        <v-switch class="ma-2" :label="$t('transit_friendly')"></v-switch>
-        <v-switch class="ma-2" :label="$t('storage')"></v-switch>
-        <v-switch class="ma-2" :label="$t('elevator')"></v-switch>
+        <v-switch class="ma-2" :label="$t('dishwasher')"        v-model="option.dishwasher"></v-switch>
+        <v-switch class="ma-2" :label="$t('oven')"              v-model="option.oven"></v-switch>
+        <v-switch class="ma-2" :label="$t('full_fumiture')"     v-model="option.full_fumiture"></v-switch>
+        <v-switch class="ma-2" :label="$t('Amenities')"         v-model="option.Amenities"></v-switch>
+        <v-switch class="ma-2" :label="$t('transit_friendly')"  v-model="option.transit_friendly"></v-switch>
+        <v-switch class="ma-2" :label="$t('storage')"           v-model="option.storage"></v-switch>
+        <v-switch class="ma-2" :label="$t('elevator')"          v-model="option.elevator"></v-switch>
         <v-text-field
                 :label="$t('other')"
                 class="purple-input"
                 prepend-icon="mdi-comment-check"
                 type="text"
+                v-model="option.other"
               />
     </v-col>
     <v-col
@@ -66,14 +67,34 @@
 <script>
 
   export default {
+    props:['uuid',],
     name:'realestate_Option',
     data () {
       return {
-       
+        user:{},
+        option:{
+          uuid:'',
+          pet:false,
+          internet:false,
+          snow_removal:false,
+          laundry:false,
+          dryer:false,
+          heating:false,
+          cooling:false,
+          refrigerator:false,
+          dishwasher:false,
+          oven:false,
+          full_fumiture:false,
+          Amenities:false,
+          transit_friendly:false,
+          storage:false,
+          elevator:false,
+          other:'', 
+        }
       }
     },
  
-
+   
     mounted() {
       this.user = JSON.parse(localStorage.getItem('user'))
       if(this.user == null) {
@@ -89,8 +110,66 @@
 
     },
     methods:{
-      previewFiles(event) {
-       
+      update() {
+
+        if ( this.uuid == null || this.uuid == "")
+        {
+           this.$swal.fire({
+                icon: 'error',
+                title: '매물을 먼저 등록해주세요',              
+            })
+          return;
+        }
+
+        const frm = new FormData()
+        frm.append('uuid', this.uuid);
+        frm.append('pet', this.option.pet);
+        frm.append('internet', this.option.internet);
+        frm.append('snow_removal', this.option.snow_removal);
+        frm.append('laundry', this.option.laundry);
+        frm.append('dryer', this.option.dryer);
+        frm.append('heating', this.option.heating);
+        frm.append('cooling', this.option.cooling);
+        frm.append('refrigerator', this.option.refrigerator);
+        frm.append('dishwasher', this.option.dishwasher);
+        frm.append('oven', this.option.oven);
+        frm.append('full_fumiture', this.option.full_fumiture);
+        frm.append('Amenities', this.option.Amenities);
+        frm.append('transit_friendly', this.option.transit_friendly);
+        frm.append('storage', this.option.storage);
+        frm.append('elevator', this.option.elevator);
+        frm.append('other', this.option.other);
+        frm.append('dealer_email', this.user.email);
+
+        this.$http.post('/api/realestate_option', frm).then((response) => {
+
+          if ( response.data.status == 'error')
+          {
+              this.$swal.fire({
+                icon: 'error',
+                title: response.data.messages,              
+              })
+          }
+          else
+          {
+            this.$swal.fire({
+              icon: 'success',
+              title: this.$t('success_update'),
+            });
+
+            var uuid = response.data.realestate.uuid;
+            alert(uuid)
+            this.$store.commit('SET_UUID', uuid);
+
+          }    
+        }).catch(error => {
+          console.log(error.response)
+           this.$swal.fire({
+                icon: 'error',
+                title: error.response.statusText,              
+              })
+         });
+
       }
     }
   }

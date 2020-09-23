@@ -9,9 +9,9 @@
       link="components/simple-tables"
     />
 
-    <building/>
-    <imageUpload/>
-    <selectoption/>
+    <building :uuid="uuid" @child="setuuid"/>
+    <imageUpload :uuid="uuid"/>
+    <selectoption :uuid="uuid"/>
 
 
 
@@ -24,10 +24,11 @@ import building from './Building'
 import selectoption from './SelectOption'
 
   export default {
+    
     name:'Realestate_create',
     data () {
       return {
-        
+        uuid: '',
       }
     },
 
@@ -51,8 +52,8 @@ import selectoption from './SelectOption'
 
     },
     methods:{
-      previewFiles(event) {
-       
+      setuuid(uuid){
+        this.uuid = uuid;
       }
     }
   }

@@ -28,3 +28,8 @@ Route::group([
     Route::get('user-profile', 'AuthController@userProfile');
     Route::post('getRealestate', 'RealestateController@show');
 });
+
+
+Route::post('/realestate_create', 'RealestateController@create'); //부동산 빌딩
+Route::post('/realestate_image', 'RealestateController@create_image'); //부동산 옵션
+Route::post('/realestate_option', 'RealestateController@create_option'); //부동산 옵션

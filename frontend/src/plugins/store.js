@@ -20,6 +20,7 @@ export default new Vuex.Store({
     drawer: null,
     accessToken: null,
     user:{},
+    uuid:'',
   },
   getters: { 
     getAuthHeader(state) { 
@@ -66,8 +67,13 @@ export default new Vuex.Store({
       state.user = null
       localStorage.removeItem('user')
       localStorage.removeItem('accessToken')
-      
     },
+    SET_UUID(state, payload) {
+      state.uuid = payload
+      alert(state.uuid)
+    },
+    
+      
   },
   actions: {
     LOGIN ({commit}, {email, password}) {

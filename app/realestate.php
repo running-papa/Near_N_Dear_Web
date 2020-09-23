@@ -23,7 +23,7 @@ class realestate extends Model
         'subject',
         'description',
         'view',
-        'dealer_id',
+        'dealer_email',
     ];
 
     protected $hidden = [
