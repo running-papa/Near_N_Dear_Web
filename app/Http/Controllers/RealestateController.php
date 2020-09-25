@@ -8,6 +8,7 @@ use App\realestate_image;
 use App\realestate_option;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\AwsImageUpload;
 
 class RealestateController extends Controller
 {
@@ -122,6 +123,53 @@ class RealestateController extends Controller
             'status' => 'success',
             'messages'   => 'success_realestate',
             'realestate_option'   => $realestate_option,
+        ]);
+        
+    }
+    public function create_images(Request $request)
+    {
+        $dealer_email = $request->dealer_email;
+
+        $awsImageUpload = new AwsImageUpload();
+
+        $temp = array();
+        //이미지 파싱 [[
+        for ($i = 0; $i< 10; $i++)
+        {
+            if ($request->hasFile('image'.$i))
+            {
+                $file = $request->file('image'.$i);
+                $temp[$i] = $awsImageUpload->setImageUpload($file, 'realestate', $dealer_email);
+                
+            }
+            else
+            {
+                $temp[$i] = '';
+            }
+        }
+        
+
+        $realestate_image = realestate_image::updateOrCreate(
+            ['uuid' => $request->uuid, 'dealer_email' => $request->dealer_email],
+            [   
+                'image1' => $temp[0],
+                'image2' => $temp[1],
+                'image3' => $temp[2],
+                'image4' => $temp[3],
+                'image5' => $temp[4],
+                'image6' => $temp[5],
+                'image7' => $temp[6],
+                'image8' => $temp[7],
+                'image9' => $temp[8],
+                'image10' => $temp[9],
+
+            ]
+        );
+       
+        return response()->json([
+            'status' => 'success',
+            'messages'   => 'success_realestate',
+            'realestate_image'   => $realestate_image,
         ]);
         
     }

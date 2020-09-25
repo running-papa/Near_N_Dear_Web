@@ -31,5 +31,5 @@ Route::group([
 
 
 Route::post('/realestate_create', 'RealestateController@create'); //부동산 빌딩
-Route::post('/realestate_image', 'RealestateController@create_image'); //부동산 옵션
+Route::post('/realestate_images', 'RealestateController@create_images'); //부동산 이미지
 Route::post('/realestate_option', 'RealestateController@create_option'); //부동산 옵션

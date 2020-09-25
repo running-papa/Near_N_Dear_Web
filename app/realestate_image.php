@@ -20,7 +20,8 @@ class realestate_image extends Model
         'image7', 
         'image8', 
         'image9', 
-        'image10', 
+        'image10',
+        'dealer_email', 
 
     ];
 
