@@ -14,6 +14,7 @@
     <div class="subtitle-1 font-weight-light">
       {{$t('realestate_building_sub')}}
     </div>
+     
   </template>
     <v-form>
         <v-container class="py-0">
@@ -335,9 +336,41 @@
         })
         this.$router.replace('/login');
       }
+
+      if (this.uuid != null)
+      {
+        const frm = new FormData()
+        frm.append('uuid', this.uuid);
+        frm.append('dealer_email', this.user.email);
+
+        this.$http.post('/api/realestate_getBuilding', frm).then((response) => {
+          
+          if ( response.data.status == 'error')
+          {
+              this.$swal.fire({
+                icon: 'error',
+                title: this.$t( response.data.messages),              
+              })
+              this.loading = false;
+              return;
+          }
+          else
+          {
+            this.building = response.data;
+          }    
+        }).catch(error => {
+          console.log(error.response)
+           this.$swal.fire({
+                icon: 'error',
+                title: error.response.data.messages,              
+            })
+            return;
+        });
+      }
     },
     methods:{
       create(){
+        console.log(this.building)
         const frm = new FormData()
         frm.append('uuid', this.uuid);
         frm.append('public', this.building.public);

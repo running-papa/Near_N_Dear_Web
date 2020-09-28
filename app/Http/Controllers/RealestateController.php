@@ -31,30 +31,59 @@ class RealestateController extends Controller
     {   
         if ( $request->uuid == '' || $request->uuid == null)
         {
-            $realestate = new realestate;
-            $realestate->uuid = floor(time()-999999999);
+            $uuid = floor(time()-999999999);
         }
         else
         {
-            $realestate =  realestate::where('uuid',$request->uuid)->first();
+            $uuid = $request->uuid;
         }
+
+        //test
+        $realestate = realestate::updateOrCreate(
+            ['uuid' => $uuid , 'dealer_email' => $request->dealer_email],
+            [   'public' => $request->public,
+                'transaction' => $request->transaction,
+                'street_number' => $request->street_number,
+                'street_name' => $request->street_name,
+                'city' => $request->city,
+                'province' => $request->province,
+                'country' => $request->country,
+                'postal_code' => $request->postal_code,
+                'price' => $request->price,
+                'price_type' => $request->price_type,
+                'subject' => $request->subject,
+                'description' => $request->description,
+                'move_in_date' => $request->move_in_date,
+            ]
+        );
+
+
+        // if ( $request->uuid == '' || $request->uuid == null)
+        // {
+        //     $realestate = new realestate;
+        //     $realestate->uuid = floor(time()-999999999);
+        // }
+        // else
+        // {
+        //     $realestate =  realestate::where('uuid',$request->uuid)->first();
+        // }
         
-        $realestate->public = $request->public;
-        $realestate->transaction = 'incomplete';
-        $realestate->street_number = $request->street_number;
-        $realestate->street_name = $request->street_name;
-        $realestate->city = $request->city;
-        $realestate->province = $request->province;
-        $realestate->country = $request->country;
-        $realestate->postal_code = $request->postal_code;
-        $realestate->price = $request->price;
-        $realestate->price_type = $request->price_type;
-        $realestate->subject = $request->subject;
-        $realestate->description = $request->description;
-        $realestate->move_in_date = $request->move_in_date;
-        $realestate->dealer_email = $request->dealer_email;
-        $realestate->view = '0';
-        $realestate->save();
+        // $realestate->public = $request->public;
+        // $realestate->transaction = 'incomplete';
+        // $realestate->street_number = $request->street_number;
+        // $realestate->street_name = $request->street_name;
+        // $realestate->city = $request->city;
+        // $realestate->province = $request->province;
+        // $realestate->country = $request->country;
+        // $realestate->postal_code = $request->postal_code;
+        // $realestate->price = $request->price;
+        // $realestate->price_type = $request->price_type;
+        // $realestate->subject = $request->subject;
+        // $realestate->description = $request->description;
+        // $realestate->move_in_date = $request->move_in_date;
+        // $realestate->dealer_email = $request->dealer_email;
+        // $realestate->view = '0';
+        // $realestate->save();
         
         if($realestate == null)
         {
@@ -65,27 +94,44 @@ class RealestateController extends Controller
         }
         else
         {
-            if ( $request->uuid == '')
-            {
-                $realestate_building = new realestate_building;
-            }
-            else
-            {
-                $realestate_building =  realestate_building::where('uuid',$request->uuid)->first();
-            }
+            
+            $uuid = $realestate->uuid;
+            
 
-            $realestate_building->uuid = $realestate->uuid;
-            $realestate_building->building_type = $request->building_type;
-            $realestate_building->building_name = $request->building_name;
-            $realestate_building->building_size = $request->building_size;
-            $realestate_building->beds = $request->beds;
-            $realestate_building->baths = $request->baths;
-            $realestate_building->floor = $request->floor;
-            $realestate_building->built_in = $request->built_in;
-            $realestate_building->parking_spaces = $request->parking_spaces;
-            $realestate_building->built_in = $request->built_in;
-            $realestate_building->built_in = $request->built_in;
-            $realestate_building->save();
+            $realestate_building = realestate_building::updateOrCreate(
+                ['uuid' => $uuid , 'dealer_email' => $request->dealer_email],
+                [   'building_type' => $request->building_type,
+                    'building_name' => $request->building_name,
+                    'building_size' => $request->building_size,
+                    'beds' => $request->beds,
+                    'baths' => $request->baths,
+                    'floor' => $request->floor,
+                    'built_in' => $request->built_in,
+                    'parking_spaces' => $request->parking_spaces,
+                    
+                ]
+            );
+
+
+            // if ( $request->uuid == '')
+            // {
+            //     $realestate_building = new realestate_building;
+            // }
+            // else
+            // {
+            //     $realestate_building =  realestate_building::where('uuid',$request->uuid)->first();
+            // }
+
+            // $realestate_building->uuid = $realestate->uuid;
+            // $realestate_building->building_type = $request->building_type;
+            // $realestate_building->building_name = $request->building_name;
+            // $realestate_building->building_size = $request->building_size;
+            // $realestate_building->beds = $request->beds;
+            // $realestate_building->baths = $request->baths;
+            // $realestate_building->floor = $request->floor;
+            // $realestate_building->built_in = $request->built_in;
+            // $realestate_building->parking_spaces = $request->parking_spaces;
+            // $realestate_building->save();
 
             return response()->json([
                 'status' => 'success',
@@ -210,6 +256,151 @@ class RealestateController extends Controller
             return response()->json($realestate);
     }
 
+    public function getBuilding(Request $request)
+    {
+        $uuid = $request->uuid;
+        $dealer_email = $request->dealer_email;
+
+        if ( $uuid == null || $dealer_email == null)
+        {
+            return response()->json([
+                'status' => 'error',
+                'messages'   => 'error_auth'
+            ]); 
+        }
+        $select_column = array( //부동산 기본정보
+                                'realestate.uuid',
+                                'public',
+                                'transaction',
+                                'street_number',
+                                'street_name',
+                                'city',
+                                'province',
+                                'country',
+                                'postal_code',
+                                'price',
+                                'price_type',
+                                'subject',
+                                'description',
+                                'view',
+                                'move_in_date',
+                                'realestate.dealer_email',
+                                'realestate.created_at',
+                                'realestate.updated_at',
+                                //부동산 상세 정보
+                                'building_type',
+                                'building_name',
+                                'building_size',
+                                'beds',
+                                'baths',
+                                'floor',
+                                'built_in',
+                                'parking_spaces',
+                            );
+
+        $realestate = realestate::select($select_column)
+                    ->Join('realestate_building','realestate.uuid','=','realestate_building.uuid')
+                    ->where([['realestate.uuid',$uuid],['realestate.dealer_email', $dealer_email]])
+                    ->orderBy('created_at', 'desc')
+                    ->first(); 
+        
+        if($realestate == null)
+        {
+            return response()->json([
+                    'status' => 'error',
+                    'messages'   => 'error_realestate'
+            ]); 
+        }
+        else
+            return response()->json($realestate);
+    }
+
+    public function getImage(Request $request)
+    {
+        $uuid = $request->uuid;
+        $dealer_email = $request->dealer_email;
+
+        if ( $uuid == null || $dealer_email == null)
+        {
+            return response()->json([
+                'status' => 'error',
+                'messages'   => 'error_auth'
+            ]); 
+        }
+        $select_column = array( 'image1',
+                                'image2',
+                                'image3',
+                                'image4',
+                                'image5',
+                                'image6',
+                                'image7',
+                                'image8',
+                                'image9',
+                                'image10',
+                            );
+
+        $realestate = realestate_image::select($select_column)
+                    ->where([['uuid',$uuid],['dealer_email', $dealer_email]])
+                    ->orderBy('created_at', 'desc')
+                    ->first(); 
+        
+        if($realestate == null)
+        {
+            return response()->json([
+                    'status' => 'error',
+                    'messages'   => 'error_realestate'
+            ]); 
+        }
+        else
+            return response()->json($realestate);
+    }
+
+    public function getOption(Request $request)
+    {
+        $uuid = $request->uuid;
+        $dealer_email = $request->dealer_email;
+
+        if ( $uuid == null || $dealer_email == null)
+        {
+            return response()->json([
+                'status' => 'error',
+                'messages'   => 'error_auth'
+            ]); 
+        }
+        $select_column = array( 'pet',
+                                'internet',
+                                'snow_removal',
+                                'laundry',
+                                'dryer',
+                                'heating',
+                                'cooling',
+                                'refrigerator',
+                                'dishwasher',
+                                'oven',
+                                'full_fumiture',
+                                'Amenities',
+                                'transit_friendly',
+                                'storage',
+                                'elevator',
+                                'other',
+                            );
+
+        $realestate = realestate_option::select($select_column)
+                    ->where([['uuid',$uuid],['dealer_email', $dealer_email]])
+                    ->orderBy('created_at', 'desc')
+                    ->first(); 
+        
+        if($realestate == null)
+        {
+            return response()->json([
+                    'status' => 'error',
+                    'messages'   => 'error_realestate'
+            ]); 
+        }
+        else
+            return response()->json($realestate);
+    }
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -233,14 +424,38 @@ class RealestateController extends Controller
         //
     }
 
+    public function delete(Request $request)
+    {
+        $uuid = $request->uuid;
+        $dealer_email = $request->dealer_email;
+
+        $realestate = realestate::where([['uuid',$uuid],['dealer_email', $dealer_email]])
+                        ->delete();
+
+        $realestate_building = realestate_building::where([['uuid',$uuid],['dealer_email', $dealer_email]])
+                        ->delete();
+
+        $realestate_image = realestate_image::where([['uuid',$uuid],['dealer_email', $dealer_email]])
+                        ->delete();
+
+        $realestate_option = realestate_option::where([['uuid',$uuid],['dealer_email', $dealer_email]])
+                        ->delete();
+        
+        return response()->json([
+            'status' => 'success',
+            'messages'   => 'delete_realestate_completed'
+        ]); 
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\realestate  $realestate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(realestate $realestate)
+    public function destroy(Request $request)
     {
-        //
+        
     }
 }

@@ -73,6 +73,16 @@ const router = new Router({
           component: () => import('@/views/back/Realestate_create.vue'),
         },
         {
+          path: 'Realestate_edit',
+          name: 'Realestate_edit',
+          component: () => import('@/views/back/Realestate_edit.vue'),
+        },
+        {
+          path: 'Vehicle_list',
+          name: 'Vehicle_list',
+          component: () => import('@/views/back/Vehicle_list.vue'),
+        },
+        {
           path: 'Vehicle_registration',
           name: 'Vehicle_registration',
           component: () => import('@/views/back/Vehicle_registration.vue'),

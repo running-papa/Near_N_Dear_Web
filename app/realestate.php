@@ -23,6 +23,7 @@ class realestate extends Model
         'subject',
         'description',
         'view',
+        'move_in_date',
         'dealer_email',
     ];
 

@@ -21,10 +21,10 @@
     <v-card >
       <v-container fluid>
         <v-carousel
-          cycle          
+          cycle
           show-arrows-on-hover
         >
-          <v-carousel-item v-if="images == ''" 
+          <v-carousel-item v-if="getImage() == false" 
           >
               <v-row   
               >
@@ -36,15 +36,15 @@
                
             </v-row>
           </v-carousel-item>
-          <v-carousel-item v-else
-            v-for="(slide, i) in images" :key="i"
+          <v-carousel-item 
+            v-for="(slide, i) in preview" :key="i"
             >
               <v-row
               class="fill-height"
               align="center"
               justify="center"
               >
-              <v-img :src="getImagePath(slide)" 
+              <v-img :src="getImagePath(slide)"
                 spect-ratio="1"
                 class="grey lighten-2"
                 max-width="95%"
@@ -65,7 +65,7 @@
             <v-file-input v-for="n in 5" :key="n"
               :rules="rules"
               accept="image/png, image/jpeg, image/bmp"
-              placeholder="Pick an avatar"
+              placeholder="Pick an realestate"
               prepend-icon="mdi-camera"
               show-size
               @change="onImageChange"
@@ -120,23 +120,9 @@
       return {
         user:{},
         rules: [value => !value || value.size < 5000000 || 'Avatar size should be less than 5 MB!',],
-        images:[],
         preview:[],
-        colors: [
-          'indigo',
-          'warning',
-          'pink darken-2',
-          'red lighten-1',
-          'deep-purple accent-4',
-          'indigo',
-          'warning',
-          'pink darken-2',
-          'red lighten-1',
-          'deep-purple accent-4',
-        ],
-        slides: [],
-          
-        
+        images:[],
+        temp:'https://source.unsplash.com/random',
       }
     },
    
@@ -149,7 +135,7 @@
         })
         this.$router.replace('/login');
       }
-      
+
 
       if (this.uuid != null)
       {
@@ -170,7 +156,7 @@
           }
           else
           {
-            this.images = response.data;
+            this.preview = response.data;
           }    
         }).catch(error => {
           console.log(error.response)
@@ -215,7 +201,6 @@
             'Content-Type': 'multipart/form-data'
           }
         }).then((response) => {
-          console.log(response.data)
 
           if ( response.data.status == 'error')
           {
@@ -233,9 +218,6 @@
           }    
         })
         .catch(error => {
-          if ( error.response == undefined)
-            return;
-            
           console.log(error.response)
            this.$swal.fire({
                 icon: 'error',
@@ -244,26 +226,23 @@
          });
       },
       getImagePath(file) {
-
-        //db 에서 가져온값은 스트링이고 파일 입력한부분은 파일
-        if ( file.constructor == String)
+        if ( file == undefined || file == '')
         {
-          if ( file == '')
-            return require('@/assets/noimage.png')
-          else
-            return file
+          return require('@/assets/noimage.png')
         }
         else
-        {
-          if ( file == undefined)
-            return require('@/assets/noimage.png')
-          else
-            return URL.createObjectURL(file)
-        }
+          return file
+      },
+      onImageChange(e) {
+          console.log(e)
+      },
+      getImage(){
         
-      },
-      onImageChange(e) {  
-      },
+        if ( this.images == '' || this.images == null )
+          return false;
+        else
+          return true;
+      }
     }
   }
   

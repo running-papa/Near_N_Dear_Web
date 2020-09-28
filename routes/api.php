@@ -33,3 +33,9 @@ Route::group([
 Route::post('/realestate_create', 'RealestateController@create'); //부동산 빌딩
 Route::post('/realestate_images', 'RealestateController@create_images'); //부동산 이미지
 Route::post('/realestate_option', 'RealestateController@create_option'); //부동산 옵션
+
+Route::post('/realestate_getBuilding', 'RealestateController@getBuilding'); //부동산 edit
+Route::post('/realestate_getImage', 'RealestateController@getImage'); //부동산 edit
+Route::post('/realestate_getOption', 'RealestateController@getOption'); //부동산 edit
+
+Route::post('/realestate_delete', 'RealestateController@delete'); //부동산 delete

@@ -11,7 +11,7 @@
 
     <v-card>
     <v-card-title>
-      <v-btn depressed class="mb-2" color="success" fab dark>
+      <v-btn depressed class="mb-2" color="info" fab dark>
         <v-icon  size="32" >{{"mdi-clipboard-text"}}</v-icon>
       </v-btn>   
       <v-spacer></v-spacer>
@@ -22,7 +22,7 @@
         single-line
         hide-details
       ></v-text-field>
-      <v-btn depressed class="mb-2"  @click="additem()" color="success" fab dark>
+      <v-btn depressed class="mb-2"  @click="additem()" color="info" fab dark>
        <v-icon>{{"mdi-plus"}}</v-icon>
       </v-btn>
     </v-card-title>
@@ -59,7 +59,7 @@
 <script>
 
   export default {
-    name: 'Realestate_list',
+    name: 'Vehicle_list',
     data () {
       return {
         search: '',

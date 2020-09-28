@@ -104,12 +104,69 @@
         })
         this.$router.replace('/login');
       }
-      else
+      
+
+      if (this.uuid != null)
       {
+        const frm = new FormData()
+        frm.append('uuid', this.uuid);
+        frm.append('dealer_email', this.user.email);
+
+        this.$http.post('/api/realestate_getOption', frm).then((response) => {
+          
+          if ( response.data.status == 'error')
+          {
+              this.$swal.fire({
+                icon: 'error',
+                title: this.$t( response.data.messages),              
+              })
+              this.loading = false;
+              return;
+          }
+          else
+          {
+            this.option.pet = this.parseString(response.data.pet);
+            this.option.internet = this.parseString(response.data.internet);
+            this.option.snow_removal = this.parseString(response.data.snow_removal);
+            this.option.laundry = this.parseString(response.data.laundry);
+            this.option.dryer = this.parseString(response.data.dryer);
+            this.option.heating = this.parseString(response.data.heating);
+            this.option.cooling = this.parseString(response.data.cooling);
+            this.option.refrigerator = this.parseString(response.data.refrigerator);
+            this.option.dishwasher = this.parseString(response.data.dishwasher);
+            this.option.oven = this.parseString(response.data.oven);
+            this.option.full_fumiture = this.parseString(response.data.full_fumiture);
+            this.option.Amenities = this.parseString(response.data.Amenities);
+            this.option.transit_friendly = this.parseString(response.data.transit_friendly);
+            this.option.storage = this.parseString(response.data.storage);
+            this.option.elevator = this.parseString(response.data.elevator);
+            this.option.other = response.data.other;
+
+
+          }    
+        }).catch(error => {
+          console.log(error.response)
+          if ( error.response == undefined)
+            return;
+
+           this.$swal.fire({
+                icon: 'error',
+                title: error.response.data.messages,              
+            })
+            return;
+        });
       }
 
     },
     methods:{
+      parseString(data) {
+        if(data == null || data == 'null')
+          return false;
+        else if ( String(data) == 'true')
+          return true;
+        else
+          return false;
+      },
       update() {
 
         if ( this.uuid == null || this.uuid == "")
@@ -164,6 +221,9 @@
           }    
         }).catch(error => {
           console.log(error.response)
+          if ( error.response == undefined)
+            return;
+
            this.$swal.fire({
                 icon: 'error',
                 title: error.response.statusText,              

@@ -19,6 +19,7 @@ class realestate_building extends Model
         'floor', //(층)
         'built_in', // ( 지어진 날짜)
         'parking_spaces', // ( 주차 몇대 )
+        'dealer_email',
     ];
 
     protected $hidden = [

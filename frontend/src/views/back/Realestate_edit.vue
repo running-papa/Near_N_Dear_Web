@@ -1,13 +1,12 @@
 <template>
   <v-container
-    id="Realestate_create"
+    id="Realestate_edit"
     fluid
     tag="section"
   >
     <base-v-component
       :heading="$t('Realestate_title')"
       link="components/simple-tables"
-      
     />
 
     <building :uuid="uuid" @child="setuuid"/>
@@ -26,10 +25,11 @@ import selectoption from './SelectOption'
 
   export default {
     
-    name:'Realestate_create',
+    name:'Realestate_edit',
     data () {
+      const param_uuid = this.$route.params.uuid;
       return {
-        uuid: '',
+        uuid: param_uuid,
       }
     },
 
@@ -39,6 +39,7 @@ import selectoption from './SelectOption'
       selectoption,
     },
     mounted() {
+      
       this.user = JSON.parse(localStorage.getItem('user'))
       if(this.user == null) {
         this.$swal.fire({

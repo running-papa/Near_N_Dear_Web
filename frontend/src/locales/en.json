@@ -216,6 +216,13 @@
   "server_alert":"-----------------------------------------------",
   "success_update":"Modification completed",
 
-  "error_check_id_pwd":"Please check your ID and password."
+  "error_check_id_pwd":"Please check your ID and password.",
+  "error_auth":"Certification details error",
+
+  "delete_realestate" : "Are you sure you want to delete it?",
+  "delete_realestate_sub" : "If you delete it, you cannot recover it recovered.",
+  "confirmButtonText":"yes",
+  "cancelButtonText":"no",
+  "delete_realestate_completed":"Deletion completed."
 }
 

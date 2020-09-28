@@ -188,7 +188,7 @@
             {
               title: this.dealer_menu.vehicle,//this.$t('Vehicle'),
               icon: 'mdi-car',
-              to: '/page/Vehicle_registration', 
+              to: '/page/Vehicle_list', 
             },
             {
               title: this.dealer_menu.mypage,//this.$t('mypage'),
