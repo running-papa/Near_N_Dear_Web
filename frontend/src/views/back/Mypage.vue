@@ -210,7 +210,7 @@
 
 <script>
   export default {
-     name: 'Login',
+     name: 'Mypage',
       data() {
       return {
         user:[],

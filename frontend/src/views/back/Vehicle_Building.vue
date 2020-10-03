@@ -1,6 +1,6 @@
 <template>
   <v-container
-    id="Building"
+    id="Vehicle_Building"
     fluid
     tag="section"
   >
@@ -8,11 +8,11 @@
 <base-material-card>
   <template v-slot:heading>
     <div class="display-2 font-weight-light">
-      {{$t('realestate_building')}}
+      {{$t('Vehicle_building')}}
     </div>
 
     <div class="subtitle-1 font-weight-light">
-      {{$t('realestate_building_sub')}}
+      {{$t('Vehicle_building_sub')}}
     </div>
      
   </template>
@@ -25,6 +25,22 @@
                     <v-radio
                       :rules="requiredRules"
                       required
+                      v-for="type in public_types"
+                      :key="type"
+                      :label="type"
+                      :value="type"
+                      color="info"
+                    ></v-radio>
+                  </v-radio-group>
+                </v-row>
+            </v-col>
+
+            <v-col cols="12">
+              <v-row justify="space-around">
+                <v-radio-group v-model="building.type" row>
+                    <v-radio
+                      :rules="requiredRules"
+                      required
                       v-for="type in types"
                       :key="type"
                       :label="type"
@@ -34,22 +50,55 @@
                   </v-radio-group>
                 </v-row>
             </v-col>
-            <v-col cols="12" md="6">
-              <v-row justify="space-around">
-                <v-radio-group v-model="building.price_type" row>
-                    <v-radio
-                      :rules="requiredRules"
-                      required
-                      v-for="type in price_types"
-                      :key="type"
-                      :label="type"
-                      :value="type"
-                      color="info"
-                    ></v-radio>
-                  </v-radio-group>
-                </v-row>
+          
+            <v-col cols="12" md="4">
+              <v-select
+                :rules="requiredRules"
+                :items="makers"
+                :label="$t('Vehicle_maker')"
+                v-model="building.maker"
+                class="purple-input"
+                prepend-icon="mdi-office-building"
+                v-on:change="changeMakers()"
+                
+              ></v-select>
             </v-col>
             <v-col cols="12" md="4">
+              <v-select
+                :rules="requiredRules"
+                :items="series"
+                :label="$t('Vehicle_series')"
+                class="purple-input"
+                v-model="building.series"
+                prepend-icon="mdi-rename-box"
+                
+              ></v-select>
+            </v-col>
+            <v-col cols="12" md="4">
+              <v-text-field
+                :rules="requiredRules"
+                required
+                class="purple-input"
+                :label="$t('Vehicle_trim')"
+                prepend-icon="mdi-chart-line-variant"
+                type="text"
+                v-model="building.trim"
+              />
+            </v-col>
+           
+
+            <v-col cols="12" md="8">
+              <v-text-field
+                :rules="requiredRules"
+                required
+                class="purple-input"
+                :label="$t('subject')"
+                prepend-icon="mdi-comment-check"
+                type="text"
+                v-model="building.subject"
+              />
+            </v-col>
+             <v-col cols="12" md="4 ">
               <v-text-field
                 :rules="requiredRules"
                 required
@@ -61,17 +110,6 @@
               />
             </v-col>
 
-            <v-col cols="12">
-              <v-text-field
-                :rules="requiredRules"
-                required
-                class="purple-input"
-                :label="$t('subject')"
-                prepend-icon="mdi-comment-check"
-                type="text"
-                v-model="building.subject"
-              />
-            </v-col>
             <v-col cols="12">
               <v-textarea
                 :rules="requiredRules"
@@ -89,10 +127,10 @@
                 :rules="requiredRules"
                 required
                 class="purple-input"
-                :label="$t('street_number')"
-                prepend-icon="mdi-road-variant"
+                :label="$t('Vehicle_year')"
+                prepend-icon="mdi-calendar"
                 type="text"
-                v-model="building.street_number"
+                v-model="building.year"
               />
             </v-col>
 
@@ -101,10 +139,10 @@
                 :rules="requiredRules"
                 required
                 class="purple-input"
-                :label="$t('street_name')"
+                :label="$t('Vehicle_mileage')"
                 prepend-icon="mdi-road-variant"
                 type="text"
-                v-model="building.street_name"
+                v-model="building.mileage"
                 
               />
             </v-col>
@@ -112,24 +150,24 @@
               <v-text-field
                 :rules="requiredRules"
                 required
-                :label="$t('city')"
+                :label="$t('Vehicle_fuel')"
                 class="purple-input"
-                prepend-icon="mdi-city"
+                prepend-icon="mdi-fuel"
                 type="text"
-                v-model="building.city"
+                v-model="building.fuel"
               />
             </v-col>
             <v-col cols="12" md="4">
               <v-text-field
                 :rules="requiredRules"
                 required
-                :label="$t('province')"
+                :label="$t('Vehicle_number')"
                 class="purple-input"
-                prepend-icon="mdi-map-marker"
+                prepend-icon="mdi-numeric"
                 type="text"
                 minlength ="6"
                 maxlength="15"
-                v-model="building.province"
+                v-model="building.number"
               />
             </v-col>
 
@@ -137,132 +175,37 @@
               <v-text-field
                 :rules="requiredRules"
                 required
-                :label="$t('country')"
-                class="purple-input"
-                prepend-icon="mdi-map-marker"
-                type="text"
-                minlength ="6"
-                maxlength="15"
-                v-model="building.country"
-              />
-            </v-col>
-            <v-col cols="12" md="4">
-              <v-text-field
-                :rules="requiredRules"
-                required
-                :label="$t('postal_code')"
+                :label="$t('Vehicle_postal_code')"
                 class="purple-input"
                 prepend-icon="mdi-home-map-marker"
                 type="text"
+                minlength ="6"
+                maxlength="15"
                 v-model="building.postal_code"
               />
             </v-col>
-
             <v-col cols="12" md="4">
               <v-text-field
                 :rules="requiredRules"
                 required
-                :label="$t('building_type')"
+                :label="$t('Vehicle_accident_status')"
                 class="purple-input"
-                prepend-icon="mdi-office-building"
+                prepend-icon="mdi-hospital"
                 type="text"
-                v-model="building.building_type"
+                v-model="building.accident_status"
               />
             </v-col>
-            <v-col cols="12" md="4">
-              <v-text-field
+            <v-col cols="12">
+              <v-textarea
                 :rules="requiredRules"
                 required
-                :label="$t('building_name')"
                 class="purple-input"
-                prepend-icon="mdi-rename-box"
-                type="text"
-                v-model="building.building_name"
+                :label="$t('Vehicle_accident_details')"
+                :placeholder="$t('Vehicle_accident_details')"
+                prepend-icon="mdi-hospital"
+                v-model="building.accident_details"
               />
             </v-col>
-            <v-col cols="12" md="4">
-              <v-text-field
-                :rules="requiredRules"
-                required
-                :label="$t('building_size')"
-                class="purple-input"
-                prepend-icon="mdi-select"
-                type="text"
-                v-model="building.building_size"
-              />
-            </v-col>
-
-            <v-col cols="12" md="4">
-              <v-text-field
-                :rules="requiredRules"
-                required
-                :label="$t('beds')"
-                class="purple-input"
-                prepend-icon="mdi-sofa"
-                type="text"
-                v-model="building.beds"
-              />
-            </v-col>
-
-            <v-col cols="12" md="4">
-              <v-text-field
-                :rules="requiredRules"
-                required
-                :label="$t('baths')"
-                class="purple-input"
-                prepend-icon="mdi-scale-bathroom"
-                type="text"
-                v-model="building.baths"
-              />
-            </v-col>
-
-            <v-col cols="12" md="4">
-              <v-text-field
-               :rules="requiredRules"
-                required
-                :label="$t('floor')"
-                class="purple-input"
-                prepend-icon="mdi-chart-line-variant"
-                type="text"
-                v-model="building.floor"
-              />
-            </v-col>
-
-           <v-col cols="12" md="4">
-              <v-text-field
-               :rules="requiredRules"
-                required
-                :label="$t('built_in')"
-                class="purple-input"
-                prepend-icon="mdi-update"
-                type="text"
-                v-model="building.built_in"
-              />
-            </v-col>
-            <v-col cols="12" md="4">
-              <v-text-field
-                :rules="requiredRules"
-                required
-                :label="$t('parking_spaces')"
-                class="purple-input"
-                prepend-icon="mdi-parking"
-                type="text"
-                v-model="building.parking_spaces"
-              />
-            </v-col>
-            <v-col cols="12" md="4">
-              <v-text-field
-                :rules="requiredRules"
-                required
-                :label="$t('move_in_date')"
-                class="purple-input"
-                prepend-icon="mdi-calendar-question"
-                type="text"
-                v-model="building.move_in_date"
-              />
-            </v-col>
-
-           
             <v-col
               cols="12"
               class="text-right"
@@ -290,36 +233,33 @@
 
   export default {
     props:['uuid',],
-    name:'Building',
+    name:'Vehicle_Building',
     data () {
       return {
-       
-       types:['public','private'],
-       price_types:['lent','sale and sale'],
+       public_types:['public','private'],
+       types:['SEDAN','SUV', 'HATCHBACK', 'MINIVAN','WAGON','TRUCK','CONVERTIBLE','ELECTRIC'],
+       makers:[],
+       series:[],
        user:{},
        building: {
          public:'',
          transaction:'',
-         street_number:'',
-         street_name:'',
-         city:'',
-         province:'',
-         country:'',
-         postal_code:'',
+         maker:'',
+         series:'',
+         trim:'',
+         type:'',
+         year:'',
+         fuel:'',
          price:'',
-         price_type:'',
+         mileage:'',
+         accident_status:'',
+         accident_details:'',
+         number:'',
          subject:'',
          description:'',
-         move_in_date:'',
+         view:'',
+         postal_code:'',
          dealer_email:'',
-         building_type:'',
-         building_name:'',
-         building_size:'',
-         beds:'',
-         baths:'',
-         floor:'',
-         built_in:'',
-         parking_spaces:'',
        },
         requiredRules: [
           v => !!v || 'is required',
@@ -337,6 +277,12 @@
         this.$router.replace('/login');
       }
 
+      //메이커 가져오기
+      this.getMaker();
+      
+      
+
+      // 저장된값 
       console.log(this.uuid)
       if (this.uuid != null || this.uuid != '')
       {
@@ -344,7 +290,7 @@
         frm.append('uuid', this.uuid);
         frm.append('dealer_email', this.user.email);
 
-        this.$http.post('/api/realestate_getBuilding', frm).then((response) => {
+        this.$http.post('/api/vehicle_getBuilding', frm).then((response) => {
           
           if ( response.data.status == 'error')
           {
@@ -371,33 +317,31 @@
     },
     methods:{
       create(){
+        
         console.log(this.building)
         const frm = new FormData()
         frm.append('uuid', this.uuid);
         frm.append('public', this.building.public);
         frm.append('transaction', this.building.transaction);
-        frm.append('street_number', this.building.street_number);
-        frm.append('street_name', this.building.street_name);
-        frm.append('city', this.building.city);
-        frm.append('province', this.building.province);
-        frm.append('country', this.building.country);
-        frm.append('postal_code', this.building.postal_code);
+        frm.append('maker', this.building.maker);
+        frm.append('series', this.building.series);
+        frm.append('trim', this.building.trim);
+        frm.append('type', this.building.type);
+        frm.append('year', this.building.year);
+        frm.append('fuel', this.building.fuel);
         frm.append('price', this.building.price);
-        frm.append('price_type', this.building.price_type);
+        frm.append('mileage', this.building.mileage);
+        frm.append('accident_status', this.building.accident_status);
+        frm.append('accident_details', this.building.accident_details);
+        frm.append('number', this.building.number);
         frm.append('subject', this.building.subject);
         frm.append('description', this.building.description);
-        frm.append('move_in_date', this.building.move_in_date);
+        frm.append('view', this.building.view);
+        frm.append('postal_code', this.building.postal_code);
         frm.append('dealer_email', this.user.email);
-        frm.append('building_type', this.building.building_type);
-        frm.append('building_name', this.building.building_name);
-        frm.append('building_size', this.building.building_size);
-        frm.append('beds', this.building.beds);
-        frm.append('baths', this.building.baths);
-        frm.append('floor', this.building.floor);
-        frm.append('built_in', this.building.built_in);
-        frm.append('parking_spaces', this.building.parking_spaces);
+        
 
-        this.$http.post('/api/realestate_create', frm).then((response) => {
+        this.$http.post('/api/vehicle_create', frm).then((response) => {
 
           if ( response.data.status == 'error')
           {
@@ -414,7 +358,7 @@
             });
 
             //부모전역 변수로 uuid 가지고있기
-            var uuid = response.data.realestate.uuid;
+            var uuid = response.data.vehicle.uuid;
             this.$emit('child', uuid);        
 
           }    
@@ -425,12 +369,72 @@
                 title: error.response.statusText,              
               })
          });
-       
+      },
+      getMaker(){
+        //신규
+        if (this.uuid != null || this.uuid != '')
+        {
+          
+          this.$http.get('/api/getMaker').then((response) => {
+            
+            if ( response.data.status == 'error')
+            {
+                this.$swal.fire({
+                  icon: 'error',
+                  title: this.$t( response.data.messages),              
+                })
+                
+                return;
+            }
+            else
+            {
+              this.makers = response.data;
+            }    
+          }).catch(error => {
+            console.log(error.response)
+            this.$swal.fire({
+                  icon: 'error',
+                  title: error.response.data.messages,              
+              })
+              return;
+          });
+        }
+      },
+      changeMakers(){
         
-        
+        if (this.building.maker != null || this.this.building.maker != '')
+        {
+           const frm = new FormData()
+          frm.append('maker', this.building.maker);
+
+          this.$http.post('/api/getSeries', frm).then((response) => {
+            
+            if ( response.data.status == 'error')
+            {
+                this.$swal.fire({
+                  icon: 'error',
+                  title: this.$t( response.data.messages),              
+                })
+                
+                return;
+            }
+            else
+            {
+              this.series = response.data;
+            }    
+          }).catch(error => {
+            console.log(error.response)
+            this.$swal.fire({
+                  icon: 'error',
+                  title: error.response.data.messages,              
+              })
+              return;
+          });
+        }
       }
     }
   }
   
 
 </script>
+

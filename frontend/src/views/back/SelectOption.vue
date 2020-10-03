@@ -106,7 +106,7 @@
       }
       
 
-      if (this.uuid != null)
+      if (this.uuid != null || this.uuid != '')
       {
         const frm = new FormData()
         frm.append('uuid', this.uuid);
@@ -213,11 +213,6 @@
               icon: 'success',
               title: this.$t('success_update'),
             });
-
-            var uuid = response.data.realestate.uuid;
-            alert(uuid)
-            this.$store.commit('SET_UUID', uuid);
-
           }    
         }).catch(error => {
           console.log(error.response)

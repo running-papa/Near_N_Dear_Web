@@ -1,11 +1,11 @@
 <template>
   <v-container
-    id="Realestate_list"
+    id="vehicle_list"
     fluid
     tag="section"
   >
     <base-v-component
-      :heading="$t('Realestate_title')"
+      :heading="$t('Vehicle_title')"
       link="components/simple-tables"
     />
 
@@ -29,7 +29,7 @@
     <v-data-table
       dense 
       :headers="headers"
-      :items="realestate"
+      :items="vehicle"
       :search="search"
       :loading="loading"
        class="elevation-1"
@@ -63,45 +63,22 @@
     data () {
       return {
         search: '',
-        realestate:[], //현재페이지 매물
         loading: false,
         user:[],
-
-        headers: [
-          {
-            text: '매물번호',
-            align: 'start',
-            sortable: false,
-            value: 'uuid',
-            
-          },
-          { text: '공개', value: 'public' },
-          { text: '매매타입', value: 'price_type' },
-          { text: '가격', value: 'price' },
-          { text: '제목', value: 'subject' },
-          { text: '도로번호', value: 'street_number' },
-          { text: '도로이름', value: 'street_name' },
-          { text: '도시', value: 'city' },
-          { text: '주', value: 'province' },
-          { text: '나라', value: 'country' },
-          { text: '조회수', value: 'view' },
-          { text: 'Actions', value: 'actions', sortable: false },
-        ],
-        realestate: [
+        headers: [],
+        vehicle:[
           {
             uuid: '',
             public: '',
-            price_type: '',
+            type: '',
+            maker: '',
+            series: '',
+            year: '',
+            fuel: '',
             price: '',
             subject: '',
-            street_number: '',
-            street_name: '',
-            city: '',
-            province: '',
-            country: '',
             view: '',
           },
-          
         ],
       }
     },
@@ -127,20 +104,19 @@
       setHeaders(){
          this.headers =  [
           {
-            text: this.$t('header_uuid'),
+            text: this.$t('Vehicle_uuid'),
             align: 'start',
             sortable: false,
             value: 'uuid',
           },
-          { text: this.$t('header_public'), value: 'public' },
-          { text: this.$t('header_price_type'), value: 'price_type' },
-          { text: this.$t('header_price'), value: 'price' },
-          { text: this.$t('header_subject'), value: 'subject' },
-          { text: this.$t('header_street_number'), value: 'street_number' },
-          { text: this.$t('header_street_name'), value: 'street_name' },
-          { text: this.$t('header_city'), value: 'city' },
-          { text: this.$t('header_province'), value: 'province' },
-          { text: this.$t('header_country'), value: 'country' },
+          { text: this.$t('Vehicle_public'), value: 'public' },
+          { text: this.$t('Vehicle_type'), value: 'type' },
+          { text: this.$t('Vehicle_maker'), value: 'maker' },
+          { text: this.$t('Vehicle_series'), value: 'series' },
+          { text: this.$t('Vehicle_year'), value: 'year' },
+          { text: this.$t('Vehicle_fuel'), value: 'fuel' },
+          { text: this.$t('Vehicle_price'), value: 'price' },
+          { text: this.$t('Vehicle_subject'), value: 'subject' },
           { text: this.$t('header_view'), value: 'view' },
           { text: 'Actions', value: 'actions', sortable: false },
         ]
@@ -150,7 +126,7 @@
         const frm = new FormData()
         frm.append('dealer_email', this.user.email);
 
-        this.$http.post('/api/auth/getRealestate', frm).then((response) => {
+        this.$http.post('/api/getVehicle', frm).then((response) => {
           
           if ( response.data.status == 'error')
           {
@@ -163,7 +139,7 @@
           }
           else
           {
-            this.realestate = response.data;
+            this.vehicle = response.data;
             this.loading = false;
           }    
         }).catch(error => {
@@ -177,14 +153,14 @@
         });
       },
       additem(){
-        this.$router.replace('/page/Realestate_create');
+        this.$router.replace('/page/Vehicle_create');
       },
       
       editItem (item) {
         console.log(item.uuid)
 
         this.$router.push({
-          name: 'Realestate_edit',
+          name: 'Vehicle_edit',
           params :{uuid: item.uuid} 
         });
       },
@@ -214,7 +190,7 @@
         frm.append('uuid', uuid);
 
         
-        this.$http.post('/api/realestate_delete', frm).then((response) => {
+        this.$http.post('/api/vehicle_delete', frm).then((response) => {
           
           if ( response.data.status == 'error')
           {

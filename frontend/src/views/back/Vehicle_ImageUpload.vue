@@ -1,6 +1,6 @@
 <template>
   <v-container
-    id="ImageUpload"
+    id="Vehicle_ImageUpload"
     fluid
     tag="section"
   >
@@ -8,11 +8,11 @@
 <base-material-card>
   <template v-slot:heading>
     <div class="display-2 font-weight-light">
-      {{$t('realestate_image')}}
+      {{$t('Vehicle_image')}}
     </div>
 
     <div class="subtitle-1 font-weight-light">
-      {{$t('realestate_image_sub')}}
+      {{$t('Vehicle_image_sub')}}
     </div>
   </template>
   
@@ -78,7 +78,7 @@
                 <v-file-input v-for="n in 5" :key="n"
                 :rules="rules"
                 accept="image/png, image/jpeg, image/bmp"
-                placeholder="Pick an realestate"
+                placeholder="Pick an Vehicle"
                 prepend-icon="mdi-camera"
                 show-size
                 v-model="images[n+4]"
@@ -115,25 +115,13 @@
 
   export default {
     props:['uuid'],
-    name:'ImageUpload',
+    name:'Vehicle_ImageUpload',
     data () {
       return {
         user:{},
-        rules: [value => !value || value.size < 5000000 || 'Avatar size should be less than 5 MB!',],
+        rules: [value => !value || value.size < 2000000 || 'Size should be less than 2 MB!',],
         images:[],
         preview:[],
-        colors: [
-          'indigo',
-          'warning',
-          'pink darken-2',
-          'red lighten-1',
-          'deep-purple accent-4',
-          'indigo',
-          'warning',
-          'pink darken-2',
-          'red lighten-1',
-          'deep-purple accent-4',
-        ],
         slides: [],
           
         
@@ -150,37 +138,8 @@
         this.$router.replace('/login');
       }
       
-
-      if (this.uuid != null || this.uuid != '')
-      {
-        const frm = new FormData()
-        frm.append('uuid', this.uuid);
-        frm.append('dealer_email', this.user.email);
-
-        this.$http.post('/api/realestate_getImage', frm).then((response) => {
-          
-          if ( response.data.status == 'error')
-          {
-              this.$swal.fire({
-                icon: 'error',
-                title: this.$t( response.data.messages),              
-              })
-              this.loading = false;
-              return;
-          }
-          else
-          {
-            this.images = response.data;
-          }    
-        }).catch(error => {
-          console.log(error.response)
-           this.$swal.fire({
-                icon: 'error',
-                title: error.response.data.messages,              
-            })
-            return;
-        });
-      }
+      this.getImage();
+      
 
     },
     methods:{
@@ -210,7 +169,7 @@
 
         frm.append('dealer_email', this.user.email);
 
-        this.$http.post('/api/realestate_images', frm, {
+        this.$http.post('/api/vehicle_images', frm, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -230,6 +189,7 @@
               icon: 'success',
               title: this.$t('success_update'),
             });
+
             this.preview = response.data.data
           }    
         })
@@ -243,6 +203,38 @@
                 title: error.response.statusText,              
               })
          });
+      },
+      getImage(){
+        if (this.uuid != null || this.uuid != '')
+        {
+          const frm = new FormData()
+          frm.append('uuid', this.uuid);
+          frm.append('dealer_email', this.user.email);
+
+          this.$http.post('/api/vehicle_getImage', frm).then((response) => {
+            
+            if ( response.data.status == 'error')
+            {
+                this.$swal.fire({
+                  icon: 'error',
+                  title: this.$t( response.data.messages),              
+                })
+                return;
+            }
+            else
+            {
+              alert('들어옴')
+              this.preview = response.data;
+            }    
+          }).catch(error => {
+            console.log(error.response)
+            this.$swal.fire({
+                  icon: 'error',
+                  title: error.response.data.messages,              
+              })
+              return;
+          });
+        }
       },
       getImagePath(file) {
 

@@ -196,36 +196,36 @@
               to: '/page/mypage', 
             },
             //예제
-            {
-              icon: 'mdi-account',
-              title: 'user',
-              to: '/page/user',
-            },
-            {
-              title: 'rtables',
-              icon: 'mdi-clipboard-outline',
-              to: '/page/tables/regular-tables',
-            },
-            {
-              title: 'typography',
-              icon: 'mdi-format-font',
-              to: '/page/components/typography',
-            },
-            {
-              title: 'icons',
-              icon: 'mdi-chart-bubble',
-              to: '/page/components/icons',
-            },
-            {
-              title: 'notifications',
-              icon: 'mdi-bell',
-              to: '/page/components/notifications',
-            },
-            {
-              title: 'google',
-              icon: 'mdi-map-marker',
-              to: '/page/maps/google-maps',
-            },
+            // {
+            //   icon: 'mdi-account',
+            //   title: 'user',
+            //   to: '/page/user',
+            // },
+            // {
+            //   title: 'rtables',
+            //   icon: 'mdi-clipboard-outline',
+            //   to: '/page/tables/regular-tables',
+            // },
+            // {
+            //   title: 'typography',
+            //   icon: 'mdi-format-font',
+            //   to: '/page/components/typography',
+            // },
+            // {
+            //   title: 'icons',
+            //   icon: 'mdi-chart-bubble',
+            //   to: '/page/components/icons',
+            // },
+            // {
+            //   title: 'notifications',
+            //   icon: 'mdi-bell',
+            //   to: '/page/components/notifications',
+            // },
+            // {
+            //   title: 'google',
+            //   icon: 'mdi-map-marker',
+            //   to: '/page/maps/google-maps',
+            // },
           ]
       }
     },

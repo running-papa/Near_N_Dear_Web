@@ -34,12 +34,12 @@ class AwsImageUpload extends Controller
         
         $extension = $getImage->getClientOriginalExtension();
         
-        $filenametostore = $s3folder.'/'.$user_folder.'/'.$filename.'_'.time().'.'.$extension;
+        $filenametostore = $s3folder.'/'.$user_folder.'/'.$filename.'.'.$extension;
         //$filenametostore = $s3folder.'/'.$filename.'_'.time().'.'.$extension;
         
         Storage::disk('s3')->put($filenametostore, (string)$image, 'public');
         
-        $url = Storage::disk('s3')->url($s3folder.'/'.$user_folder.'/'.$filename.'_'.time().'.'.$extension);
+        $url = Storage::disk('s3')->url($s3folder.'/'.$user_folder.'/'.$filename.'.'.$extension);
         
         return $url;
        

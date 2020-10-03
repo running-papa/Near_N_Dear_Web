@@ -83,12 +83,22 @@ const router = new Router({
           component: () => import('@/views/back/Vehicle_list.vue'),
         },
         {
+          path: 'Vehicle_create',
+          name: 'Vehicle_create',
+          component: () => import('@/views/back/Vehicle_create.vue'),
+        },
+        {
+          path: 'Vehicle_edit',
+          name: 'Vehicle_edit',
+          component: () => import('@/views/back/Vehicle_edit.vue'),
+        },
+        {
           path: 'Vehicle_registration',
           name: 'Vehicle_registration',
           component: () => import('@/views/back/Vehicle_registration.vue'),
         },
         {
-          path: 'mypage',
+          path: 'Mypage',
           name: 'Mypage',
           component: () => import('@/views/back/Mypage.vue'),
         },

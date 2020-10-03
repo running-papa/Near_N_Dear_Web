@@ -58,38 +58,11 @@ class RealestateController extends Controller
         );
 
 
-        // if ( $request->uuid == '' || $request->uuid == null)
-        // {
-        //     $realestate = new realestate;
-        //     $realestate->uuid = floor(time()-999999999);
-        // }
-        // else
-        // {
-        //     $realestate =  realestate::where('uuid',$request->uuid)->first();
-        // }
-        
-        // $realestate->public = $request->public;
-        // $realestate->transaction = 'incomplete';
-        // $realestate->street_number = $request->street_number;
-        // $realestate->street_name = $request->street_name;
-        // $realestate->city = $request->city;
-        // $realestate->province = $request->province;
-        // $realestate->country = $request->country;
-        // $realestate->postal_code = $request->postal_code;
-        // $realestate->price = $request->price;
-        // $realestate->price_type = $request->price_type;
-        // $realestate->subject = $request->subject;
-        // $realestate->description = $request->description;
-        // $realestate->move_in_date = $request->move_in_date;
-        // $realestate->dealer_email = $request->dealer_email;
-        // $realestate->view = '0';
-        // $realestate->save();
-        
         if($realestate == null)
         {
             return response()->json([
                     'status' => 'error',
-                    'messages'   => 'error_realestate'
+                    'messages'   => 'error_search_data'
             ]); 
         }
         else
@@ -112,26 +85,6 @@ class RealestateController extends Controller
                 ]
             );
 
-
-            // if ( $request->uuid == '')
-            // {
-            //     $realestate_building = new realestate_building;
-            // }
-            // else
-            // {
-            //     $realestate_building =  realestate_building::where('uuid',$request->uuid)->first();
-            // }
-
-            // $realestate_building->uuid = $realestate->uuid;
-            // $realestate_building->building_type = $request->building_type;
-            // $realestate_building->building_name = $request->building_name;
-            // $realestate_building->building_size = $request->building_size;
-            // $realestate_building->beds = $request->beds;
-            // $realestate_building->baths = $request->baths;
-            // $realestate_building->floor = $request->floor;
-            // $realestate_building->built_in = $request->built_in;
-            // $realestate_building->parking_spaces = $request->parking_spaces;
-            // $realestate_building->save();
 
             return response()->json([
                 'status' => 'success',
@@ -212,10 +165,16 @@ class RealestateController extends Controller
             ]
         );
        
+        $arr = [];
+        for($i = 1; $i <=10; $i++)
+        {
+            $arr[] = $realestate_image['image'.$i];
+        }
+
         return response()->json([
             'status' => 'success',
             'messages'   => 'success_realestate',
-            'realestate_image'   => $realestate_image,
+            'data'   => $arr,
         ]);
         
     }
@@ -249,7 +208,7 @@ class RealestateController extends Controller
         {
             return response()->json([
                     'status' => 'error',
-                    'messages'   => 'error_realestate'
+                    'messages'   => 'error_search_data'
             ]); 
         }
         else
@@ -308,7 +267,7 @@ class RealestateController extends Controller
         {
             return response()->json([
                     'status' => 'error',
-                    'messages'   => 'error_realestate'
+                    'messages'   => 'error_search_data'
             ]); 
         }
         else
@@ -348,7 +307,7 @@ class RealestateController extends Controller
         {
             return response()->json([
                     'status' => 'error',
-                    'messages'   => 'error_realestate'
+                    'messages'   => 'error_search_data'
             ]); 
         }
         else
@@ -394,7 +353,7 @@ class RealestateController extends Controller
         {
             return response()->json([
                     'status' => 'error',
-                    'messages'   => 'error_realestate'
+                    'messages'   => 'error_search_data'
             ]); 
         }
         else
