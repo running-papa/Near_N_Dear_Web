@@ -98,6 +98,11 @@ const router = new Router({
           component: () => import('@/views/back/Vehicle_registration.vue'),
         },
         {
+          path: 'CellPhone_list',
+          name: 'CellPhone_list',
+          component: () => import('@/views/back/CellPhone_list.vue'),
+        },
+        {
           path: 'Mypage',
           name: 'Mypage',
           component: () => import('@/views/back/Mypage.vue'),

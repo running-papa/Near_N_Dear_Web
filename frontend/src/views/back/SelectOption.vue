@@ -106,7 +106,7 @@
       }
       
 
-      if (this.uuid != null || this.uuid != '')
+      if (this.uuid != '')
       {
         const frm = new FormData()
         frm.append('uuid', this.uuid);
@@ -151,7 +151,7 @@
 
            this.$swal.fire({
                 icon: 'error',
-                title: error.response.data.messages,              
+                title: this.$t(error.response.data.messages),              
             })
             return;
         });
@@ -204,7 +204,7 @@
           {
               this.$swal.fire({
                 icon: 'error',
-                title: response.data.messages,              
+                title: this.$t(response.data.messages),              
               })
           }
           else

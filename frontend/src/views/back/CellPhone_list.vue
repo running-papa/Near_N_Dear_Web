@@ -1,11 +1,11 @@
 <template>
   <v-container
-    id="vehicle_list"
+    id="CellPhone_list"
     fluid
     tag="section"
   >
     <base-v-component
-      :heading="$t('Vehicle_title')"
+      :heading="$t('CellPhone_title')"
       link="components/simple-tables"
     />
 
@@ -59,7 +59,7 @@
 <script>
 
   export default {
-    name: 'Vehicle_list',
+    name: 'CellPhone_list',
     data () {
       return {
         search: '',

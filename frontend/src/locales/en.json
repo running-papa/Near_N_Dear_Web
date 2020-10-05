@@ -228,6 +228,9 @@
   "cruise_control":"cruise_control",
   "loop_carrier" :"loop_carrier",
   
+  "back_cellPhone":"------------------back_cellPhone-----------------------",
+  "cellPhone":"CellPhone",
+  "CellPhone_title":"CellPhone trading",
 
   "avatar": "jyp",
   "buttons": "Buttons",

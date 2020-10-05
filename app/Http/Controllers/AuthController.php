@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Validator;
 use App\User;
-
+use App\Http\Controllers\AwsImageUpload;
 
 class AuthController extends Controller {
 
@@ -102,6 +102,18 @@ class AuthController extends Controller {
 
         $user->fill($request->all());
         $user->password = bcrypt($request->password);
+
+        
+        if ($request->hasFile('user_avatar'))
+        {
+            //user_avatar
+            $awsImageUpload = new AwsImageUpload();
+            
+            $file = $request->file('user_avatar');
+            $user_avatar = $awsImageUpload->setImageUpload($file, 'avatar',  $request->email);    
+            $user->user_avatar = $user_avatar;
+        }
+
         $user->save();
 
         

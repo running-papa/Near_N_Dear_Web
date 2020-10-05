@@ -5,11 +5,7 @@
     tag="section"
   >
     <v-row>
-      <v-cal cols="12">
-        <Premium_upgrade/>
-      </v-cal>
-
-      <!-- <v-col
+      <v-col
         cols="12"
         lg="4"
       >
@@ -75,9 +71,9 @@
             <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
           </template>
         </base-material-chart-card>
-      </v-col> -->
+      </v-col>
 
-      <!-- <v-col
+      <v-col
         cols="12"
         lg="4"
       >
@@ -149,9 +145,9 @@
             <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
           </template>
         </base-material-chart-card>
-      </v-col> -->
+      </v-col>
 
-      <!-- <v-col
+      <v-col
         cols="12"
         lg="4"
       >
@@ -216,7 +212,7 @@
             <span class="caption grey--text font-weight-light">campaign sent 26 minutes ago</span>
           </template>
         </base-material-chart-card>
-      </v-col> -->
+      </v-col>
 
       <v-col
         cols="12"
@@ -279,7 +275,7 @@
         />
       </v-col>
 
-      <!-- <v-col
+      <v-col
         cols="12"
         md="6"
       >
@@ -391,14 +387,12 @@
             </v-tab-item>
           </v-tabs-items>
         </base-material-card>
-      </v-col> -->
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import Premium_upgrade from './Premium_upgrade'
-
   export default {
     name: 'DashboardDashboard',
 
@@ -597,9 +591,7 @@ import Premium_upgrade from './Premium_upgrade'
         },
       }
     },
-    components:{
-      Premium_upgrade,
-    },
+
     methods: {
       complete (index) {
         this.list[index] = !this.list[index]

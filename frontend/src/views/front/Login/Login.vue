@@ -253,7 +253,7 @@ import Privacy from "./Privacy";
           console.log(error.response)
            this.$swal.fire({
                 icon: 'error',
-                title: error.response.data.messages,              
+                title: this.$t(error.response.data.messages),              
             })
 
             return;
@@ -316,7 +316,7 @@ import Privacy from "./Privacy";
           {
               this.$swal.fire({
                 icon: 'error',
-                title: response.data.messages,              
+                title: this.$t(response.data.messages),              
               })
           }
           else

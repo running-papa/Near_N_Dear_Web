@@ -170,7 +170,7 @@
           console.log(error.response)
            this.$swal.fire({
                 icon: 'error',
-                title: error.response.data.messages,              
+                title: this.$t(error.response.data.messages),              
             })
             this.loading = false;
             return;

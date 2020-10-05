@@ -220,6 +220,9 @@
   "cruise_control":"cruise_control",
   "loop_carrier" :"loop_carrier",
 
+  "back_cellPhone":"------------------back_cellPhone-----------------------",
+  "cellPhone":"cellPhone",
+  
   "avatar": "jyp",
   "buttons": "Buttons",
   "calendar": "Calendar",

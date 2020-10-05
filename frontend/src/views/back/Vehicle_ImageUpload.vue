@@ -180,7 +180,7 @@
           {
               this.$swal.fire({
                 icon: 'error',
-                title: response.data.messages,              
+                title: this.$t(response.data.messages),              
               })
           }
           else
@@ -205,7 +205,8 @@
          });
       },
       getImage(){
-        if (this.uuid != null || this.uuid != '')
+        
+        if (this.uuid != '')
         {
           const frm = new FormData()
           frm.append('uuid', this.uuid);
@@ -223,14 +224,13 @@
             }
             else
             {
-              alert('들어옴')
               this.preview = response.data;
             }    
           }).catch(error => {
             console.log(error.response)
             this.$swal.fire({
                   icon: 'error',
-                  title: error.response.data.messages,              
+                  title: this.$t(error.response.data.messages),              
               })
               return;
           });

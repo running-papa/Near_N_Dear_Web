@@ -1,12 +1,12 @@
 <template>
   <section id="hero2">
-    <v-container class="fill-height px-4 py-8">
-      <v-row>
-        <v-col cols="6">
-          <v-img :src="require('@/assets/bg_2.png')"/>
+    <v-container class="px-12 py-4 pb-0">
+      <v-row no-gutters>
+        <v-col cols="6" no-gutters class="pt-6 pb-0">
+          <v-img :src="require('@/assets/bg_2.png')" height="100%" />
         </v-col>
         <v-col cols="6">
-            <v-responsive class="d-flex align-center" height="100%" max-width="700" width="100%">
+            <v-responsive class="d-flex align-center" height="100%"  width="100%">
             <p class="display-4 font-weight-light">{{$t('home_text_search_home')}}</p>
             <p class="display-2 font-weight-light">
               {{$t('home_text_search_sub1')}} 
@@ -40,3 +40,7 @@ export default {
   },
 };
 </script>
+<style lang="sass">
+.top-padding
+    padding-top : 100px
+</style>

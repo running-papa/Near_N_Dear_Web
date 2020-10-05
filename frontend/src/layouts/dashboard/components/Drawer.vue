@@ -134,6 +134,7 @@
       dealer_menu :{
         realestate : '',
         vehicle:'',
+        cellPhone:'',
         mypage:'',
       },
       items: [],
@@ -172,6 +173,7 @@
       drawer_menu(){
         this.dealer_menu.realestate = this.$t('Realestate');
         this.dealer_menu.vehicle = this.$t('Vehicle');
+        this.dealer_menu.cellPhone = this.$t('cellPhone');
         this.dealer_menu.mypage = this.$t('mypage');
       
         this.items = [
@@ -181,17 +183,22 @@
               to: '/page/dashboard',
             },
             {
-              title: this.dealer_menu.realestate,//,
+              title: this.dealer_menu.realestate,
               icon: 'mdi-home-map-marker',
               to: '/page/Realestate_list', 
             },
             {
-              title: this.dealer_menu.vehicle,//this.$t('Vehicle'),
+              title: this.dealer_menu.vehicle,
               icon: 'mdi-car',
               to: '/page/Vehicle_list', 
             },
             {
-              title: this.dealer_menu.mypage,//this.$t('mypage'),
+              title: this.dealer_menu.cellPhone,
+              icon: 'mdi-cellphone',
+              to: '/page/CellPhone_list', 
+            },
+            {
+              title: this.dealer_menu.mypage,
               icon: 'mdi-account',
               to: '/page/mypage', 
             },

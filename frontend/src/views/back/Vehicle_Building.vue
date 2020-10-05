@@ -66,7 +66,7 @@
             <v-col cols="12" md="4">
               <v-select
                 :rules="requiredRules"
-                :items="series"
+                :items="series_all"
                 :label="$t('Vehicle_series')"
                 class="purple-input"
                 v-model="building.series"
@@ -239,7 +239,7 @@
        public_types:['public','private'],
        types:['SEDAN','SUV', 'HATCHBACK', 'MINIVAN','WAGON','TRUCK','CONVERTIBLE','ELECTRIC'],
        makers:[],
-       series:[],
+       series_all:[],
        user:{},
        building: {
          public:'',
@@ -283,8 +283,8 @@
       
 
       // 저장된값 
-      console.log(this.uuid)
-      if (this.uuid != null || this.uuid != '')
+      
+      if (this.uuid != '')
       {
         const frm = new FormData()
         frm.append('uuid', this.uuid);
@@ -304,12 +304,13 @@
           else
           {
             this.building = response.data;
+            this.getSeries();
           }    
         }).catch(error => {
           console.log(error.response)
            this.$swal.fire({
                 icon: 'error',
-                title: error.response.data.messages,              
+                title: this.$t(error.response.data.messages),              
             })
             return;
         });
@@ -347,7 +348,7 @@
           {
               this.$swal.fire({
                 icon: 'error',
-                title: response.data.messages,              
+                title: this.$t(response.data.messages),              
               })
           }
           else
@@ -372,9 +373,8 @@
       },
       getMaker(){
         //신규
-        if (this.uuid != null || this.uuid != '')
+        if (this.uuid != '')
         {
-          
           this.$http.get('/api/getMaker').then((response) => {
             
             if ( response.data.status == 'error')
@@ -394,42 +394,45 @@
             console.log(error.response)
             this.$swal.fire({
                   icon: 'error',
-                  title: error.response.data.messages,              
+                  title: this.$t(error.response.data.messages),              
               })
               return;
           });
         }
       },
-      changeMakers(){
+      getSeries(){
+        const frm = new FormData()
+        frm.append('maker', this.building.maker);
+
+        this.$http.post('/api/getSeries', frm).then((response) => {
+          
+          if ( response.data.status == 'error')
+          {
+              this.$swal.fire({
+                icon: 'error',
+                title: this.$t( response.data.messages),              
+              })
+              
+              return;
+          }
+          else
+          {
+            this.series_all = response.data;
+          }    
+        }).catch(error => {
+          console.log(error.response)
+          this.$swal.fire({
+                icon: 'error',
+                title: this.$t(error.response.data.messages),              
+            })
+            return;
+        });
         
+      },
+      changeMakers(){
         if (this.building.maker != null || this.this.building.maker != '')
         {
-           const frm = new FormData()
-          frm.append('maker', this.building.maker);
-
-          this.$http.post('/api/getSeries', frm).then((response) => {
-            
-            if ( response.data.status == 'error')
-            {
-                this.$swal.fire({
-                  icon: 'error',
-                  title: this.$t( response.data.messages),              
-                })
-                
-                return;
-            }
-            else
-            {
-              this.series = response.data;
-            }    
-          }).catch(error => {
-            console.log(error.response)
-            this.$swal.fire({
-                  icon: 'error',
-                  title: error.response.data.messages,              
-              })
-              return;
-          });
+          this.getSeries();
         }
       }
     }

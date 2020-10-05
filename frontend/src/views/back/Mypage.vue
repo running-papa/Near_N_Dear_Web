@@ -27,10 +27,12 @@
                   <v-hover>
                     <template v-slot:default="{ hover }">
                       <v-avatar size="128" class="mx-auto elevation-6" color="grey">
-                        <v-img :src="user.user_avatar" />
+                        <v-img :src="preview" />
                         <v-fade-transition>
                           <v-overlay v-if="hover" absolute color="#036358">
-                            <v-btn text color="info">edit</v-btn>
+                            <label class="button" @click="$refs.fileInput.value = ''" color="info">edit
+                              <input type="file" style="display:none" ref="fileInput"  @change="onImageChange">
+                            </label>
                           </v-overlay>
                         </v-fade-transition>
                       </v-avatar>
@@ -215,6 +217,7 @@
       return {
         user:[],
         types:['Dealer','Landing serve'],
+        preview:'',
       }
     },
     mounted() {
@@ -233,6 +236,7 @@
         else
           this.user.user_level = 'Dealer'
 
+        this.preview = this.user.user_avatar;
       }
       
     },
@@ -256,6 +260,9 @@
         frm.append('country', this.user.country);
         frm.append('postal', this.user.postal);
         frm.append('about_me', this.user.about_me);
+
+        if (  this.user.user_avatar != '')
+          frm.append('user_avatar', this.user.user_avatar);
         
         
 
@@ -264,13 +271,17 @@
         else
           frm.append('user_level', "30");
 
-        this.$http.post('/api/auth/update', frm).then((response) => {
+        this.$http.post('/api/auth/update', frm,{
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then((response) => {
 
           if ( response.data.status == 'error')
           {
               this.$swal.fire({
                 icon: 'error',
-                title: response.data.messages,              
+                title: this.$t(response.data.messages),              
               })
           }
           else
@@ -339,7 +350,48 @@
           return ''
         else
           return check
-      }
+      },
+      onImageChange(e) {
+          //파일첨부 유효성 검사
+          let files = e.target.files || e.dataTransfer.files;
+          let fileForm = /^image\/(png|jpeg|jpg)$/;
+          let maxSize = 5 * 1024 * 1024;
+
+          if (!files.length)
+              return;
+
+          if (!e.target.files[0].type.match(/^image\/(png|jpeg|jpg)$/))
+          {
+             this.$swal.fire({
+              icon: 'error',
+              title: '파일 형식이 올바르지 않습니다.',   
+             })   
+
+              this.$refs.image.value = '';
+              this.preview = '';
+             return;
+          }
+          else if( e.target.files[0].size > maxSize)
+          {
+             this.$swal.fire({
+              icon: 'error',
+              title: '파일 사이즈는 5MB 이하 입니다.',   
+             })
+             this.$refs.image.value = '';
+             this.preview = '';
+             return;
+          }
+
+          //form 데이터 전달 이미지파일
+          this.user.user_avatar = e.target.files[0];
+
+          //프리뷰 생성
+          var file = e.target.files[0];
+          if (file && file.type.match(/^image\/(png|jpeg|jpg)$/)) {
+            this.preview = window.URL.createObjectURL(file)
+          }
+          
+      },
     }
   }
   
