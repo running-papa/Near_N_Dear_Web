@@ -83,6 +83,7 @@
   "mypage_user_address":"주소",
   "mypage_user_city":"도시",
   "mypage_user_country":"나라",
+  "mypage_user_province":"주",
   "mypage_user_postal":"우편번호",
   "mypage_user_about":"나는 어떤사람?",
   "mypage_user_about_me":"나를 표현해 주세요.",
@@ -223,6 +224,18 @@
 
   "back_cellPhone":"------------------back_cellPhone-----------------------",
   "cellPhone":"cellPhone",
+  "CellPhone_title":"CellPhone trading",
+  
+  "CellPhone_uuid":"Number",
+  "CellPhone_public":"public",
+  "CellPhone_maker":"maker",
+  "CellPhone_device_name":"device_name",
+  "CellPhone_device_storage":"device_storage",
+  "CellPhone_srp":"srp",
+  "CellPhone_agreement_credit":"agreement_credit",
+  "CellPhone_dro":"dro",
+  "CellPhone_monthly_payment":"monthly_payment",
+  "CellPhone_view":"view",
   
   "avatar": "jyp",
   "buttons": "Buttons",
@@ -283,10 +296,10 @@
   "error_auth":"Certification details error",
   "error_search_data": "Sales search error",
 
-  "delete_realestate" : "Are you sure you want to delete it?",
-  "delete_realestate_sub" : "If you delete it, you cannot recover it recovered.",
+  "delete" : "Are you sure you want to delete it?",
+  "delete_sub" : "If you delete it, you cannot recover it recovered.",
+  "delete_completed":"Deletion completed.",
   "confirmButtonText":"yes",
-  "cancelButtonText":"no",
-  "delete_realestate_completed":"Deletion completed."
+  "cancelButtonText":"no"
 
 }

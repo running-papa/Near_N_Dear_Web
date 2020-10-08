@@ -1,11 +1,11 @@
 <template>
   <v-container
-    id="CellPhone_list"
+    id="CellPhone_Plan_list"
     fluid
     tag="section"
   >
     <base-v-component
-      :heading="$t('CellPhone_title')"
+      :heading="$t('CellPhone_Plan_title')"
       link="components/simple-tables"
     />
 
@@ -59,24 +59,24 @@
 <script>
 
   export default {
-    name: 'CellPhone_list',
+    name: 'CellPhone_Plan_list',
     data () {
       return {
         search: '',
         loading: false,
         user:[],
         headers: [],
-        cellphone:[
+        cellphone_plan:[
           {
             uuid: '',
             public: '',
-            maker: '',
-            device_name: '',
-            device_storage: '',
-            agreement_credit: '',
-            dro: '',
-            monthly_payment:'',
-            //view: '',
+            subject: '',
+            call_text: '',
+            FormData: '',
+            features: '',
+            processing_fee:'',
+            price: '',
+            total_price: '',
           },
         ],
       }
@@ -101,30 +101,30 @@
     },
     methods:{
       setHeaders(){
+       
          this.headers =  [
           {
-            text: this.$t('CellPhone_uuid'),
+            text: this.$t('CellPhone_Plan_uuid'),
             align: 'start',
             sortable: false,
             value: 'uuid',
           },
-          { text: this.$t('CellPhone_public'), value: 'public' },
-          { text: this.$t('CellPhone_maker'), value: 'maker' },
-          { text: this.$t('CellPhone_device_name'), value: 'device_name' },
-          { text: this.$t('CellPhone_device_storage'), value: 'device_storage' },
-          { text: this.$t('CellPhone_agreement_credit'), value: 'agreement_credit' },
-          { text: this.$t('CellPhone_dro'), value: 'dro' },
-          { text: this.$t('CellPhone_monthly_payment'), value: 'monthly_payment' },
-          // { text: this.$t('CellPhone_view'), value: 'view' },
+          { text: this.$t('CellPhone_Plan_public'), value: 'public' },
+          { text: this.$t('CellPhone_Plan_subject'), value: 'subject' },
+          { text: this.$t('CellPhone_Plan_call_text'), value: 'call_text' },
+          { text: this.$t('CellPhone_Plan_Data'), value: 'Data' },
+          { text: this.$t('CellPhone_Plan_features'), value: 'features' },
+          { text: this.$t('CellPhone_Plan_processing_fee'), value: 'processing_fee' },
+          { text: this.$t('CellPhone_Plan_price'), value: 'price' },
+          { text: this.$t('CellPhone_Plan_totla_price'), value: 'total_price' },
+          
           { text: 'Actions', value: 'actions', sortable: false },
         ]
       },
       getDataFromApi(){
         this.loading = true;
-        const frm = new FormData()
-        frm.append('dealer_email', this.user.email);
-
-        this.$http.post('/api/getCellPhone', frm).then((response) => {
+        
+        this.$http.get('/api/getCellPhone_plan').then((response) => {
           
           if ( response.data.status == 'error')
           {
@@ -151,14 +151,14 @@
         });
       },
       additem(){
-        this.$router.replace('/page/CellPhone_create');
+        this.$router.replace('/page/CellPhone_Plan_create');
       },
       
       editItem (item) {
         console.log(item.uuid)
 
         this.$router.push({
-          name: 'CellPhone_edit',
+          name: 'CellPhone_Plan_edit',
           params :{uuid: item.uuid} 
         });
       },
@@ -184,11 +184,9 @@
       confirmDelete(uuid){
 
         const frm = new FormData()
-        frm.append('dealer_email', this.user.email);
         frm.append('uuid', uuid);
-
         
-        this.$http.post('/api/cellPhone_delete', frm).then((response) => {
+        this.$http.post('/api/cellPhone_Plan_delete', frm).then((response) => {
           
           if ( response.data.status == 'error')
           {

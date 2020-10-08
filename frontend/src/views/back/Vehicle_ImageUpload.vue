@@ -216,10 +216,7 @@
             
             if ( response.data.status == 'error')
             {
-                this.$swal.fire({
-                  icon: 'error',
-                  title: this.$t( response.data.messages),              
-                })
+                console.log(this.$t( response.data.messages))
                 return;
             }
             else

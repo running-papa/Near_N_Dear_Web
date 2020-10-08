@@ -438,7 +438,7 @@ class VehicleController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'messages'   => 'delete_realestate_completed'
+            'messages'   => 'delete_completed'
         ]); 
     }
 

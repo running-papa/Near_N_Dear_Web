@@ -49,10 +49,28 @@ Route::post('/vehicle_create', 'VehicleController@create'); //차량 빌딩
 Route::post('/vehicle_images', 'VehicleController@create_images'); //차량 이미지
 Route::post('/vehicle_option', 'VehicleController@create_option'); //차량옵션
 
-Route::post('/vehicle_getBuilding', 'VehicleController@getBuilding'); //부동산 edit
-Route::post('/vehicle_getImage', 'VehicleController@getImage'); //부동산 edit
-Route::post('/vehicle_getOption', 'VehicleController@getOption'); //부동산 edit
-
-
+Route::post('/vehicle_getBuilding', 'VehicleController@getBuilding'); //차량 edit
+Route::post('/vehicle_getImage', 'VehicleController@getImage'); //차량 edit
+Route::post('/vehicle_getOption', 'VehicleController@getOption'); //차량 edit
 Route::post('/vehicle_delete', 'VehicleController@delete'); //차량 delete
 
+
+//휴대폰 매물
+Route::post('/getCellPhone', 'CellphoneController@show');
+Route::post('/getDevice', 'CellphoneController@getDevice');
+
+Route::post('/cellPhone_create', 'CellphoneController@create'); //휴대폰 빌딩
+Route::post('/cellPhone_getBuilding', 'CellphoneController@getBuilding'); //휴대폰 edit
+Route::post('/cellPhone_delete', 'CellphoneController@delete'); //delete
+
+//플랜
+Route::get('/getCellPhone_plan', 'CellphonePlanController@show');
+Route::post('/cellPhone_Plan_create', 'CellphonePlanController@create'); //plan 빌딩
+Route::post('/cellPhone_Plan_getBuilding', 'CellphonePlanController@getBuilding'); //plan edit
+Route::post('/cellPhone_Plan_delete', 'CellphonePlanController@delete'); //delete
+
+//addons
+Route::get('/getCellPhone_addons', 'CellphoneAddonsController@show');
+Route::post('/cellPhone_addons_create', 'CellphoneAddonsController@create'); 
+Route::post('/cellPhone_addons_getBuilding', 'CellphoneAddonsController@getBuilding');
+Route::post('/cellPhone_addons_delete', 'CellphoneAddonsController@delete'); 

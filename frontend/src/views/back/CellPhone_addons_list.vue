@@ -1,11 +1,11 @@
 <template>
   <v-container
-    id="CellPhone_list"
+    id="CellPhone_addons_list"
     fluid
     tag="section"
   >
     <base-v-component
-      :heading="$t('CellPhone_title')"
+      :heading="$t('CellPhone_Plan_title')"
       link="components/simple-tables"
     />
 
@@ -29,12 +29,39 @@
     <v-data-table
       dense 
       :headers="headers"
-      :items="cellphone"
+      :items="data"
       :search="search"
       :loading="loading"
-       class="elevation-1"
+       class="elevation-1 "
     >
-    <template v-slot:[`item.actions`]="{ item }">
+    <template v-slot:item="{ item }">
+      <tr>
+        <td class="long-data">{{ item.uuid }}</td>
+        <td class="long-data">{{ item.public }}</td>
+        <td class="long-data">{{ item.type }}</td>
+        <td class="long-data">{{ item.subject }}</td>
+        <td class="long-data">{{ item.description }}</td>
+        <td class="long-data">{{ item.more }}</td>
+        <td class="long-data">{{ item.price }}</td>
+        <td>
+            <v-icon
+            small
+            class="mr-2"
+            @click="editItem(item)"
+          >
+            mdi-pencil
+          </v-icon>
+          <v-icon
+            small
+            @click="deleteItem(item)"
+          >
+            mdi-delete
+          </v-icon>
+      </td>
+      </tr>
+    </template>
+
+    <!-- <template v-slot:[`item.actions`]="{ item }">
       <v-icon
         small
         class="mr-2"
@@ -48,7 +75,7 @@
       >
         mdi-delete
       </v-icon>
-    </template>
+    </template> -->
     </v-data-table>
     
   
@@ -59,24 +86,22 @@
 <script>
 
   export default {
-    name: 'CellPhone_list',
+    name: 'CellPhone_addons_list',
     data () {
       return {
         search: '',
         loading: false,
         user:[],
         headers: [],
-        cellphone:[
+        cellphone_addons:[
           {
             uuid: '',
             public: '',
-            maker: '',
-            device_name: '',
-            device_storage: '',
-            agreement_credit: '',
-            dro: '',
-            monthly_payment:'',
-            //view: '',
+            type: '',
+            subject: '',
+            description: '',
+            more: '',
+            price: '',
           },
         ],
       }
@@ -103,28 +128,26 @@
       setHeaders(){
          this.headers =  [
           {
-            text: this.$t('CellPhone_uuid'),
+            text: this.$t('CellPhone_Plan_uuid'),
             align: 'start',
             sortable: false,
             value: 'uuid',
+            width: "10%"
           },
-          { text: this.$t('CellPhone_public'), value: 'public' },
-          { text: this.$t('CellPhone_maker'), value: 'maker' },
-          { text: this.$t('CellPhone_device_name'), value: 'device_name' },
-          { text: this.$t('CellPhone_device_storage'), value: 'device_storage' },
-          { text: this.$t('CellPhone_agreement_credit'), value: 'agreement_credit' },
-          { text: this.$t('CellPhone_dro'), value: 'dro' },
-          { text: this.$t('CellPhone_monthly_payment'), value: 'monthly_payment' },
-          // { text: this.$t('CellPhone_view'), value: 'view' },
+          { text: this.$t('CellPhone_addons_public'), value: 'public' , width: "10%" , align: 'center'},
+          { text: this.$t('CellPhone_addons_type'), value: 'type' ,width: "10%" , align: 'center'},
+          { text: this.$t('CellPhone_addons_subject'), value: 'subject' ,width: "20%", align: 'center'},
+          { text: this.$t('CellPhone_addons_description'), value: 'description' ,width: "20%" , align: 'center'},
+          { text: this.$t('CellPhone_addons_more'), value: 'more', width:'150',width: "20%" , align: 'center'},
+          { text: this.$t('CellPhone_addons_price'), value: 'price' ,width: "10%" , align: 'center'},
+          
           { text: 'Actions', value: 'actions', sortable: false },
         ]
       },
       getDataFromApi(){
         this.loading = true;
-        const frm = new FormData()
-        frm.append('dealer_email', this.user.email);
-
-        this.$http.post('/api/getCellPhone', frm).then((response) => {
+        
+        this.$http.get('/api/getCellPhone_addons').then((response) => {
           
           if ( response.data.status == 'error')
           {
@@ -137,7 +160,7 @@
           }
           else
           {
-            this.cellphone = response.data;
+            this.data = response.data;
             this.loading = false;
           }    
         }).catch(error => {
@@ -151,14 +174,14 @@
         });
       },
       additem(){
-        this.$router.replace('/page/CellPhone_create');
+        this.$router.replace('/page/CellPhone_addons_create');
       },
       
       editItem (item) {
         console.log(item.uuid)
 
         this.$router.push({
-          name: 'CellPhone_edit',
+          name: 'CellPhone_addons_edit',
           params :{uuid: item.uuid} 
         });
       },
@@ -184,11 +207,9 @@
       confirmDelete(uuid){
 
         const frm = new FormData()
-        frm.append('dealer_email', this.user.email);
         frm.append('uuid', uuid);
 
-        
-        this.$http.post('/api/cellPhone_delete', frm).then((response) => {
+        this.$http.post('/api/cellPhone_addons_delete', frm).then((response) => {
           
           if ( response.data.status == 'error')
           {
@@ -225,3 +246,11 @@
     }
   }
 </script>
+<style lang="sass">
+  .long-data
+    max-width: 180px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+    
+</style>

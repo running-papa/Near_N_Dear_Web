@@ -1,6 +1,6 @@
 <template>
   <v-container
-    id="Vehicle_Building"
+    id="CellPhone_Building"
     fluid
     tag="section"
   >
@@ -8,11 +8,11 @@
 <base-material-card>
   <template v-slot:heading>
     <div class="display-2 font-weight-light">
-      {{$t('Vehicle_building')}}
+      {{$t('CellPhone_building')}}
     </div>
 
     <div class="subtitle-1 font-weight-light">
-      {{$t('Vehicle_building_sub')}}
+      {{$t('CellPhone_building_sub')}}
     </div>
      
   </template>
@@ -37,112 +37,109 @@
 
             <v-col cols="12">
               <v-row justify="space-around">
-                <v-radio-group v-model="building.type" row>
+                <v-radio-group v-model="building.maker" row v-on:change="changeMakers()">
                     <v-radio
                       :rules="requiredRules"
                       required
-                      v-for="type in types"
+                      v-for="type in makers"
                       :key="type"
                       :label="type"
                       :value="type"
                       color="info"
+                      
                     ></v-radio>
                   </v-radio-group>
                 </v-row>
             </v-col>
           
+            
             <v-col cols="12" md="4">
               <v-select
-                :rules="requiredRules"
-                :items="makers"
-                :label="$t('Vehicle_maker')"
-                v-model="building.maker"
+                :items="device_all"
+                :label="$t('CellPhone_device_name')"
                 class="purple-input"
-                prepend-icon="mdi-office-building"
-                v-on:change="changeMakers()"
-                
-              ></v-select>
-            </v-col>
-            <v-col cols="12" md="4">
-              <v-select
-                :rules="requiredRules"
-                :items="series_all"
-                :label="$t('Vehicle_series')"
-                class="purple-input"
-                v-model="building.series"
+                v-model="building.device_name"
                 prepend-icon="mdi-rename-box"
                 
               ></v-select>
             </v-col>
             <v-col cols="12" md="4">
-              <v-text-field
-                :rules="requiredRules"
-                required
+              <v-select
+                :items="device_storage_all"
+                :label="$t('CellPhone_device_storage')"
+                v-model="building.device_storage"
                 class="purple-input"
-                :label="$t('Vehicle_trim')"
-                prepend-icon="mdi-chart-line-variant"
-                type="text"
-                v-model="building.trim"
-              />
+                prepend-icon="mdi-database"
+                
+                
+              ></v-select>
+            </v-col>
+            <v-col cols="12" md="4">
+              <v-select
+                :items="color_all"
+                :label="$t('CellPhone_color')"
+                v-model="building.device_color"
+                class="purple-input"
+                prepend-icon="mdi-database"
+                />
             </v-col>
            
 
-            <v-col cols="12" md="8">
+            <v-col cols="12" md="3">
               <v-text-field
                 :rules="requiredRules"
                 required
                 class="purple-input"
-                :label="$t('subject')"
+                :label="$t('CellPhone_item')"
                 prepend-icon="mdi-comment-check"
                 type="text"
-                v-model="building.subject"
+                v-model="building.item"
               />
             </v-col>
-             <v-col cols="12" md="4 ">
+             <!-- <v-col cols="12" md="3">
               <v-text-field
                 :rules="requiredRules"
                 required
                 class="purple-input"
-                :label="$t('price')"
+                :label="$t('CellPhone_srp')"
                 prepend-icon="mdi-cash-usd"
                 type="text"
-                v-model="building.price"
+                v-model="building.srp"
               />
-            </v-col>
+            </v-col> -->
 
-            <v-col cols="12">
-              <v-textarea
+            <v-col cols="12" md="3">
+              <v-text-field
                 :rules="requiredRules"
                 required
                 class="purple-input"
-                :label="$t('description')"
-                :placeholder="$t('description')"
+                :label="$t('CellPhone_tier')"
                 prepend-icon="mdi-comment-check"
-                v-model="building.description"
+                v-model="building.tier"
               />
             </v-col>
 
-            <v-col cols="12" md="4">
+            <v-col cols="12" md="3">
               <v-text-field
                 :rules="requiredRules"
                 required
                 class="purple-input"
-                :label="$t('Vehicle_year')"
-                prepend-icon="mdi-calendar"
+                :label="$t('CellPhone_up_front_cost')"
+                prepend-icon="mdi-cash-usd"
                 type="text"
-                v-model="building.year"
+                v-model="building.up_front_cost"
               />
             </v-col>
 
-            <v-col cols="12" md="4">
+            <v-col cols="12" md="3">
               <v-text-field
                 :rules="requiredRules"
                 required
                 class="purple-input"
-                :label="$t('Vehicle_mileage')"
+                :label="$t('CellPhone_agreement_credit')"
                 prepend-icon="mdi-road-variant"
                 type="text"
-                v-model="building.mileage"
+                v-model="building.agreement_credit"
                 
               />
             </v-col>
@@ -150,62 +147,73 @@
               <v-text-field
                 :rules="requiredRules"
                 required
-                :label="$t('Vehicle_fuel')"
+                :label="$t('CellPhone_dro')"
                 class="purple-input"
-                prepend-icon="mdi-fuel"
+                prepend-icon="mdi-cash-usd"
                 type="text"
-                v-model="building.fuel"
+                v-model="building.dro"
               />
             </v-col>
             <v-col cols="12" md="4">
               <v-text-field
                 :rules="requiredRules"
                 required
-                :label="$t('Vehicle_number')"
+                :label="$t('CellPhone_monthly_discount')"
                 class="purple-input"
-                prepend-icon="mdi-numeric"
+                prepend-icon="mdi-cash-usd"
+                type="text"
+                v-model="building.monthly_discount"
+              />
+            </v-col>
+            <v-col cols="12" md="4">
+              <v-text-field
+                :rules="requiredRules"
+                required
+                :label="$t('CellPhone_monthly_payment')"
+                class="purple-input"
+                prepend-icon="mdi-cash-usd"
                 type="text"
                 minlength ="6"
                 maxlength="15"
-                v-model="building.number"
+                v-model="building.monthly_payment"
               />
             </v-col>
+            <v-row cols="12">
+              <v-col cols="6">
+                <v-carousel cycle show-arrows-on-hover height="auto">
+                  <v-carousel-item 
+                    v-for="(slide, i) in preview" :key="i"
+                    >
+                      <v-row
+                      class="fill-height"
+                      align="center"
+                      justify="center"
+                      >
+                      <v-img :src="getImagePath(slide)" 
+                        spect-ratio="1"
+                        class="grey lighten-2"
+                        max-width="100%"
+                        
+                        />
+                    </v-row>
+                  
+                  </v-carousel-item>
+                </v-carousel>
+              </v-col>
 
-            <v-col cols="12" md="4">
-              <v-text-field
-                :rules="requiredRules"
-                required
-                :label="$t('Vehicle_postal_code')"
-                class="purple-input"
-                prepend-icon="mdi-home-map-marker"
-                type="text"
-                minlength ="6"
-                maxlength="15"
-                v-model="building.postal_code"
-              />
-            </v-col>
-            <v-col cols="12" md="4">
-              <v-text-field
-                :rules="requiredRules"
-                required
-                :label="$t('Vehicle_accident_status')"
-                class="purple-input"
-                prepend-icon="mdi-hospital"
-                type="text"
-                v-model="building.accident_status"
-              />
-            </v-col>
-            <v-col cols="12">
-              <v-textarea
-                :rules="requiredRules"
-                required
-                class="purple-input"
-                :label="$t('Vehicle_accident_details')"
-                :placeholder="$t('Vehicle_accident_details')"
-                prepend-icon="mdi-hospital"
-                v-model="building.accident_details"
-              />
-            </v-col>
+              <v-col cols="6">
+                <v-file-input v-for="n in 5" :key="n"
+                accept="image/png, image/jpeg, image/bmp"
+                placeholder="Pick an image"
+                prepend-icon="mdi-camera"
+                show-size
+                type="file"
+                ref="image"
+                v-model="images[n-1]"
+                ></v-file-input>
+              </v-col>
+            </v-row>
+            
             <v-col
               cols="12"
               class="text-right"
@@ -218,7 +226,7 @@
                 {{$t('realestate_create')}}
               </v-btn>
               
-            </v-col>
+            </v-col> 
           </v-row>
         </v-container>
       </v-form>
@@ -233,32 +241,39 @@
 
   export default {
     props:['uuid',],
-    name:'Vehicle_Building',
+    name:'CellPhone_Building',
     data () {
       return {
        public_types:['public','private'],
-       types:['SEDAN','SUV', 'HATCHBACK', 'MINIVAN','WAGON','TRUCK','CONVERTIBLE','ELECTRIC'],
-       makers:[],
-       series_all:[],
+       makers:['Apple','Samsung', 'LG', 'Huawei',],
+       device_storage_all:['64GB','128GB','256GB','512GB',],
+       device_all:[],
+       color_all:['Grey','Silver','Blue','Orange','Black','Play Black','Edge + Grey', 'Fast Whilte', 'Play Blue', 'Hyper', 'Vision Brown',
+                  'Green', 'LV', 'Navy', 'Orange', 'Red', 'White', 'Purple',],
+       preview:[''],
+       images:[],
        user:{},
        building: {
-         public:'',
+         public:'public',
          transaction:'',
-         maker:'',
-         series:'',
-         trim:'',
-         type:'',
-         year:'',
-         fuel:'',
-         price:'',
-         mileage:'',
-         accident_status:'',
-         accident_details:'',
-         number:'',
-         subject:'',
-         description:'',
-         view:'',
-         postal_code:'',
+         maker:'Apple',
+         device_name:'',
+         device_storage:'',
+         device_color:'',
+         item:'',
+         //srp:'',
+         tier:'',
+         up_front_cost:'',
+         //isc:'',
+         agreement_credit:'',
+         dro:'',
+         monthly_discount:'',
+         monthly_payment:'',
+         image1:'',
+         image2:'',
+         image3:'',
+         image4:'',
+         image5:'',
          dealer_email:'',
        },
         requiredRules: [
@@ -278,20 +293,17 @@
       }
 
       //메이커 가져오기
-      this.getMaker();
-      
-      
+      this.getDevice();
 
-      // 저장된값 
-      
+      // edit 
       if (this.uuid != '')
       {
         const frm = new FormData()
         frm.append('uuid', this.uuid);
         frm.append('dealer_email', this.user.email);
 
-        this.$http.post('/api/vehicle_getBuilding', frm).then((response) => {
-          
+        this.$http.post('/api/cellPhone_getBuilding', frm).then((response) => {
+
           if ( response.data.status == 'error')
           {
              console.log(this.$t( response.data.messages))
@@ -299,8 +311,8 @@
           }
           else
           {
-            this.building = response.data;
-            this.getSeries();
+            this.building = response.data.cellphone;
+            this.preview = response.data.preview;
           }    
         }).catch(error => {
           console.log(error.response)
@@ -314,31 +326,31 @@
     },
     methods:{
       create(){
-        
         console.log(this.building)
         const frm = new FormData()
         frm.append('uuid', this.uuid);
         frm.append('public', this.building.public);
         frm.append('transaction', this.building.transaction);
         frm.append('maker', this.building.maker);
-        frm.append('series', this.building.series);
-        frm.append('trim', this.building.trim);
-        frm.append('type', this.building.type);
-        frm.append('year', this.building.year);
-        frm.append('fuel', this.building.fuel);
-        frm.append('price', this.building.price);
-        frm.append('mileage', this.building.mileage);
-        frm.append('accident_status', this.building.accident_status);
-        frm.append('accident_details', this.building.accident_details);
-        frm.append('number', this.building.number);
-        frm.append('subject', this.building.subject);
-        frm.append('description', this.building.description);
-        frm.append('view', this.building.view);
-        frm.append('postal_code', this.building.postal_code);
+        frm.append('device_name', this.building.device_name);
+        frm.append('device_storage', this.building.device_storage);
+        frm.append('device_color', this.building.device_color);
+        frm.append('item', this.building.item);
+        frm.append('tier', this.building.tier);
+        frm.append('up_front_cost', this.building.up_front_cost);
+        frm.append('agreement_credit', this.building.agreement_credit);
+        frm.append('dro', this.building.dro);
+        frm.append('monthly_discount', this.building.monthly_discount);
+        frm.append('monthly_payment', this.building.monthly_payment);
+        frm.append('image0', this.images[0]);
+        frm.append('image1', this.images[1]);
+        frm.append('image2', this.images[2]);
+        frm.append('image3', this.images[3]);
+        frm.append('image4', this.images[4]);
         frm.append('dealer_email', this.user.email);
         
 
-        this.$http.post('/api/vehicle_create', frm).then((response) => {
+        this.$http.post('/api/cellPhone_create', frm).then((response) => {
 
           if ( response.data.status == 'error')
           {
@@ -355,8 +367,10 @@
             });
 
             //부모전역 변수로 uuid 가지고있기
-            var uuid = response.data.vehicle.uuid;
+            var uuid = response.data.cellphone.uuid;
             this.$emit('child', uuid);        
+
+            this.preview = response.data.data;
 
           }    
         }).catch(error => {
@@ -367,41 +381,13 @@
               })
          });
       },
-      getMaker(){
-        //신규
-        //if (this.uuid != '')
-        {
-          this.$http.get('/api/getMaker').then((response) => {
-            
-            if ( response.data.status == 'error')
-            {
-                this.$swal.fire({
-                  icon: 'error',
-                  title: this.$t( response.data.messages),              
-                })
-                
-                return;
-            }
-            else
-            {
-              this.makers = response.data;
-            }    
-          }).catch(error => {
-            console.log(error.response)
-            this.$swal.fire({
-                  icon: 'error',
-                  title: this.$t(error.response.data.messages),              
-              })
-              return;
-          });
-        }
-      },
-      getSeries(){
+      getDevice(){
+
         const frm = new FormData()
         frm.append('maker', this.building.maker);
 
-        this.$http.post('/api/getSeries', frm).then((response) => {
-          
+        this.$http.post('/api/getDevice', frm).then((response) => {
+          console.log(response.data)
           if ( response.data.status == 'error')
           {
               this.$swal.fire({
@@ -413,7 +399,7 @@
           }
           else
           {
-            this.series_all = response.data;
+            this.device_all = response.data;
           }    
         }).catch(error => {
           console.log(error.response)
@@ -425,10 +411,59 @@
         });
         
       },
+      getImagePath(file) {
+        
+        //db 에서 가져온값은 스트링이고 파일 입력한부분은 파일
+        if ( file.constructor == String)
+        {
+          if ( file == '')
+            return require('@/assets/noimage.png')
+          else
+            return file
+        }
+        else
+        {
+          
+          if ( file == undefined)
+            return require('@/assets/noimage.png')
+          else
+            return URL.createObjectURL(file)
+        }
+        
+      },
+      // getSeries(){
+      //   const frm = new FormData()
+      //   frm.append('maker', this.building.maker);
+
+      //   this.$http.post('/api/getSeries', frm).then((response) => {
+          
+      //     if ( response.data.status == 'error')
+      //     {
+      //         this.$swal.fire({
+      //           icon: 'error',
+      //           title: this.$t( response.data.messages),              
+      //         })
+              
+      //         return;
+      //     }
+      //     else
+      //     {
+      //       this.series_all = response.data;
+      //     }    
+      //   }).catch(error => {
+      //     console.log(error.response)
+      //     this.$swal.fire({
+      //           icon: 'error',
+      //           title: this.$t(error.response.data.messages),              
+      //       })
+      //       return;
+      //   });
+        
+      // },
       changeMakers(){
         if ( this.building.maker != '')
         {
-          this.getSeries();
+          this.getDevice();
         }
       }
     }

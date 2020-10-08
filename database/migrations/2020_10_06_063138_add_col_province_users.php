@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColVehcle extends Migration
+class AddColProvinceUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColVehcle extends Migration
      */
     public function up()
     {
-        Schema::table('vehicle', function (Blueprint $table) {
-            $table->string('accident_details');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('province');
         });
     }
 
@@ -25,8 +25,8 @@ class AddColVehcle extends Migration
      */
     public function down()
     {
-        Schema::table('vehicle', function (Blueprint $table) {
-            $table->dropColumn('accident_details');
+        Schema::table('users', function (Blueprint $table) {
+            $table->$table->dropColumn('province');
         });
     }
 }

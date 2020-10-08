@@ -193,8 +193,8 @@
         console.log(item)
          this.$swal.fire({
             icon: 'warning',
-            title: this.$t('delete_realestate'),
-            text : this.$t('delete_realestate_sub'),
+            title: this.$t('delete'),
+            text : this.$t('delete_sub'),
             showCancelButton : true,
             confirmButtonClass : "btn-danger",
             confirmButtonText : this.$t('confirmButtonText'),

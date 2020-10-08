@@ -83,6 +83,7 @@
   "mypage_user_address":"Adress",
   "mypage_user_city":"City",
   "mypage_user_country":"Country",
+  "mypage_user_province":"Province",
   "mypage_user_postal":"Postal Code",
   "mypage_user_about":"About Me",
   "mypage_user_about_me":"Please express me",
@@ -232,6 +233,65 @@
   "cellPhone":"CellPhone",
   "CellPhone_title":"CellPhone trading",
 
+  "CellPhone_uuid":"Number",
+  "CellPhone_public":"public",
+  "CellPhone_maker":"maker",
+  "CellPhone_device_name":"device name",
+  "CellPhone_device_storage":"storage",
+  "CellPhone_srp":"srp",
+  "CellPhone_agreement_credit":"agreement credit",
+  "CellPhone_dro":"dro",
+  "CellPhone_monthly_payment":"monthly payment",
+  "CellPhone_view":"view",
+  "CellPhone_color":"color",
+  "CellPhone_item":"item",
+  "CellPhone_tier":"tier",
+  "CellPhone_up_front_cost":"up front cost",
+  "CellPhone_isc":"isc",
+  "CellPhone_monthly_discount":"monthly discount",
+
+
+  "CellPhone_building":"CellPhone Building",
+  "CellPhone_building_sub":"complete your CellPhone building",
+  
+
+  "back_cellPhone_Plan":"------------------back_cellPhone_plan-----------------------",
+  "cellPhone_Plan":"CellPhone_Plan",
+  "cellPhone_Plan_title":"CellPhone Plan",
+  "CellPhone_Plan_building":"CellPhone_Plan Building",
+  "CellPhone_Plan_building_sub":"complete your CellPhone_Plan building",
+
+  "CellPhone_Plan_uuid":"Number",
+  "CellPhone_Plan_public":"public",
+  "CellPhone_Plan_subject":"subject",
+  "CellPhone_Plan_description":"description",
+  "CellPhone_Plan_more":"more",
+  "CellPhone_Plan_call_text_type":"call text type",
+  "CellPhone_Plan_call_text":"calltext",
+  "CellPhone_Plan_Data_type":"Data type",
+  "CellPhone_Plan_Data":"Data",
+  "CellPhone_Plan_features":"features",
+  "CellPhone_Plan_add_one":"add_one",
+  "CellPhone_Plan_processing_fee":"processing_fee",
+  "CellPhone_Plan_price":"price",
+  "CellPhone_Plan_total_price":"total_price",
+  
+  "back_cellPhone_addons":"------------------back_cellPhone_plan-----------------------",
+  "cellPhone_addons":"CellPhone addons",
+  "cellPhone_addons_title":"CellPhone addons",
+  "CellPhone_addons_building":"CellPhone_addons Building",
+  "CellPhone_addons_building_sub":"complete your CellPhone_addons building",
+
+  "CellPhone_addons_uuid":"Number",
+  "CellPhone_addons_public":"public",
+  "CellPhone_addons_type":"type",
+  "CellPhone_addons_subject":"subject",
+  "CellPhone_addons_description":"description",
+  "CellPhone_addons_more":"more",
+  "CellPhone_addons_price":"price",
+  
+
+
   "avatar": "jyp",
   "buttons": "Buttons",
   "calendar": "Calendar",
@@ -291,10 +351,11 @@
   "error_auth":"Certification details error",
   "error_search_data": "Sales search error",
 
-  "delete_realestate" : "Are you sure you want to delete it?",
-  "delete_realestate_sub" : "If you delete it, you cannot recover it recovered.",
+  "delete" : "Are you sure you want to delete it?",
+  "delete_sub" : "If you delete it, you cannot recover it recovered.",
+  "delete_completed":"Deletion completed.",
   "confirmButtonText":"yes",
-  "cancelButtonText":"no",
-  "delete_realestate_completed":"Deletion completed."
+  "cancelButtonText":"no"
+  
 }
 

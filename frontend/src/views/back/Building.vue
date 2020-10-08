@@ -348,12 +348,8 @@
           
           if ( response.data.status == 'error')
           {
-              this.$swal.fire({
-                icon: 'error',
-                title: this.$t( response.data.messages),              
-              })
-              this.loading = false;
-              return;
+            console.log(this.$t( response.data.messages))
+            return;
           }
           else
           {

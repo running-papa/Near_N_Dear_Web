@@ -71,10 +71,10 @@
 
         <v-col
           cols="12"
-          md="5"
+          md="4"
         >
           <v-card
-            elevation="8"
+            elevation="12"
             class="mb-4"
           >
             <!-- <base-img
@@ -86,6 +86,7 @@
             <v-carousel-item  v-for="(slide, i) in preview" :key="i">
                 <base-img :src="slide" 
                   max-width="100%"
+                  height="500"
                   />
             </v-carousel-item>
             </v-carousel>
@@ -125,9 +126,9 @@
         ['Price', 'Free', '$99'],
       ],
       preview:[
-        "https://source.unsplash.com/random",
-        "https://source.unsplash.com/random",
-        "https://source.unsplash.com/random",
+        require(`@/assets/article-1.jpg`),
+        require(`@/assets/article-2.jpg`),
+        require(`@/assets/article-3.jpg`),
       ]
     }),
   }

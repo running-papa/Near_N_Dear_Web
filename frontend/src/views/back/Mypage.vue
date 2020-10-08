@@ -148,7 +148,7 @@
                   />
                 </v-col>
 
-                <v-col cols="12" md="4">
+                <v-col cols="12" md="3">
                   <v-text-field
                     :label="$t('mypage_user_city')"
                     class="purple-input"
@@ -158,7 +158,7 @@
                   />
                 </v-col>
 
-                <v-col cols="12" md="4">
+                <v-col cols="12" md="3">
                   <v-text-field
                     :label="$t('mypage_user_country')"
                     class="purple-input"
@@ -167,8 +167,17 @@
                     type="text"
                   />
                 </v-col>
+                <v-col cols="12" md="3">
+                  <v-text-field
+                    :label="$t('mypage_user_province')"
+                    class="purple-input"
+                    v-model="user.province"
+                    prepend-icon="mdi-map-marker"
+                    type="text"
+                  />
+                </v-col>
 
-                <v-col cols="12" md="4">
+                <v-col cols="12" md="3">
                   <v-text-field
                     class="purple-input"
                     :label="$t('mypage_user_postal')"

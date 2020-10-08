@@ -25,7 +25,7 @@
       nav
     >
       <v-list-item
-      to="/page/user">
+      to="/page/mypage">
         <v-list-item-avatar
           class="align-self-center"
           color="white"
@@ -135,6 +135,8 @@
         realestate : '',
         vehicle:'',
         cellPhone:'',
+        cellPhone_Plan:'',
+        cellPhone_addons:'',
         mypage:'',
       },
       items: [],
@@ -174,6 +176,8 @@
         this.dealer_menu.realestate = this.$t('Realestate');
         this.dealer_menu.vehicle = this.$t('Vehicle');
         this.dealer_menu.cellPhone = this.$t('cellPhone');
+        this.dealer_menu.cellPhone_Plan = this.$t('cellPhone_Plan');
+        this.dealer_menu.cellPhone_addons = this.$t('cellPhone_addons');
         this.dealer_menu.mypage = this.$t('mypage');
       
         this.items = [
@@ -196,6 +200,16 @@
               title: this.dealer_menu.cellPhone,
               icon: 'mdi-cellphone',
               to: '/page/CellPhone_list', 
+            },
+            {
+              title: this.dealer_menu.cellPhone_Plan,
+              icon: 'mdi-rename-box',
+              to: '/page/CellPhone_Plan_list', 
+            },
+            {
+              title: this.dealer_menu.cellPhone_addons,
+              icon: 'mdi-clipboard-plus',
+              to: '/page/CellPhone_addons_list', 
             },
             {
               title: this.dealer_menu.mypage,

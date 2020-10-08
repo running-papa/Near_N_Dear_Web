@@ -82,6 +82,7 @@
   "mypage_user_address":"Adress",
   "mypage_user_city":"City",
   "mypage_user_country":"Country",
+  "mypage_user_province":"Province",
   "mypage_user_postal":"Postal Code",
   "mypage_user_about":"About Me",
   "mypage_user_about_me":"Please express me",
@@ -222,6 +223,18 @@
 
   "back_cellPhone":"------------------back_cellPhone-----------------------",
   "cellPhone":"cellPhone",
+  "CellPhone_title":"CellPhone trading",
+  
+  "CellPhone_uuid":"Number",
+  "CellPhone_public":"public",
+  "CellPhone_maker":"maker",
+  "CellPhone_device_name":"device_name",
+  "CellPhone_device_storage":"device_storage",
+  "CellPhone_srp":"srp",
+  "CellPhone_agreement_credit":"agreement_credit",
+  "CellPhone_dro":"dro",
+  "CellPhone_monthly_payment":"monthly_payment",
+  "CellPhone_view":"view",
   
   "avatar": "jyp",
   "buttons": "Buttons",
@@ -282,10 +295,10 @@
   "error_auth":"Certification details error",
   "error_search_data": "Sales search error",
 
-  "delete_realestate" : "Are you sure you want to delete it?",
-  "delete_realestate_sub" : "If you delete it, you cannot recover it recovered.",
+  "delete" : "Are you sure you want to delete it?",
+  "delete_sub" : "If you delete it, you cannot recover it recovered.",
+  "delete_completed":"Deletion completed.",
   "confirmButtonText":"yes",
-  "cancelButtonText":"no",
-  "delete_realestate_completed":"Deletion completed."
+  "cancelButtonText":"no"
 
 }

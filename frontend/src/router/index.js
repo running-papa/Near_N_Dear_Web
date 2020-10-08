@@ -103,6 +103,46 @@ const router = new Router({
           component: () => import('@/views/back/CellPhone_list.vue'),
         },
         {
+          path: 'CellPhone_create',
+          name: 'CellPhone_create',
+          component: () => import('@/views/back/CellPhone_create.vue'),
+        },
+        {
+          path: 'CellPhone_edit',
+          name: 'CellPhone_edit',
+          component: () => import('@/views/back/CellPhone_edit.vue'),
+        },
+        {
+          path: 'CellPhone_Plan_list',
+          name: 'CellPhone_Plan_list',
+          component: () => import('@/views/back/CellPhone_Plan_list.vue'),
+        },
+        {
+          path: 'CellPhone_Plan_create',
+          name: 'CellPhone_Plan_create',
+          component: () => import('@/views/back/CellPhone_Plan_create.vue'),
+        },
+        {
+          path: 'CellPhone_Plan_edit',
+          name: 'CellPhone_Plan_edit',
+          component: () => import('@/views/back/CellPhone_Plan_edit.vue'),
+        },
+        {
+          path: 'CellPhone_addons_list',
+          name: 'CellPhone_addons_list',
+          component: () => import('@/views/back/CellPhone_addons_list.vue'),
+        },
+        {
+          path: 'CellPhone_addons_create',
+          name: 'CellPhone_addons_create',
+          component: () => import('@/views/back/CellPhone_addons_create.vue'),
+        },
+        {
+          path: 'CellPhone_addons_edit',
+          name: 'CellPhone_addons_edit',
+          component: () => import('@/views/back/CellPhone_addons_edit.vue'),
+        },
+        {
           path: 'Mypage',
           name: 'Mypage',
           component: () => import('@/views/back/Mypage.vue'),

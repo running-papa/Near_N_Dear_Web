@@ -20,6 +20,7 @@ class realestate extends Model
         'country',
         'postal_code',
         'price',
+        'price_type',
         'subject',
         'description',
         'view',
