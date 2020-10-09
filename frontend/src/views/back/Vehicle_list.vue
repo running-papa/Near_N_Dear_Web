@@ -33,6 +33,7 @@
       :search="search"
       :loading="loading"
        class="elevation-1"
+       @click:row="rowClick"
     >
     <template v-slot:[`item.actions`]="{ item }">
       <v-icon
@@ -50,18 +51,23 @@
       </v-icon>
     </template>
     </v-data-table>
-    
+
+    <mobile v-on:closemodal="closemodal" :mobile_type="mobile_type" :uuid="uuid" :mobile_view="mobile_view"></mobile>  
   
   </v-card>
   </v-container>
 </template>
 
 <script>
-
+import mobile from './mobile_view'
   export default {
     name: 'Vehicle_list',
     data () {
       return {
+        uuid:'',
+        mobile_type:'vehicle',
+        mobile_view:false,
+
         search: '',
         loading: false,
         user:[],
@@ -82,7 +88,9 @@
         ],
       }
     },
-
+    components:{
+      mobile
+    },
     mounted() {
       this.user = JSON.parse(localStorage.getItem('user'))
       if(this.user == null) {
@@ -220,6 +228,14 @@
             this.loading = false;
             return;
         });
+      },
+      rowClick(value) {
+        this.uuid = value.uuid;
+        this.mobile_view = true;
+      },
+      closemodal(){
+        this.mobile_view = false;
+        this.uuid = '';
       },
 
       

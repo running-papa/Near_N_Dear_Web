@@ -267,6 +267,7 @@
         frm.append('address', this.user.address);
         frm.append('city', this.user.city);
         frm.append('country', this.user.country);
+        frm.append('province', this.user.province);
         frm.append('postal', this.user.postal);
         frm.append('about_me', this.user.about_me);
 

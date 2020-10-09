@@ -3,6 +3,7 @@
   "about":"About",
   "contact":"Contact",
   "login":"Login",
+  "close":"Close",
 
   "Front Home":"------------------front Home-----------------------",
   "home_text_main":"For settling in Canada",
@@ -93,10 +94,10 @@
   "Realestate":"Realestate",
   "Realestate_title":"real estate sale",
   "Realestate_table_title":"Products",
-
+  
   "header_uuid":"Number",
   "header_public":"public",
-  "header_price_type":"price_type",
+  "header_price_type":"price type",
   "header_price":"price",
   "header_subject":"subject",
   "header_street_number":"street_number",
@@ -150,6 +151,9 @@
   "storage":"storage",
   "elevator":"elevator",
   "other":"other",
+
+  
+
 
 
 
@@ -276,7 +280,7 @@
   "CellPhone_Plan_price":"price",
   "CellPhone_Plan_total_price":"total_price",
   
-  "back_cellPhone_addons":"------------------back_cellPhone_plan-----------------------",
+  "back_cellPhone_addons":"------------------back_cellPhone_addons-----------------------",
   "cellPhone_addons":"CellPhone addons",
   "cellPhone_addons_title":"CellPhone addons",
   "CellPhone_addons_building":"CellPhone_addons Building",
@@ -290,6 +294,19 @@
   "CellPhone_addons_more":"more",
   "CellPhone_addons_price":"price",
   
+  "back_mobile":"------------------back_mobile_view-----------------------",
+  "mobile":"mobile view",
+  "mobile_title":"CellPhone addons",
+  
+  "Transaction_information" : "Transaction information",
+  "room_information" : "Room information",
+  "option_information" : "Option information",
+  "image_information" : "Image information",
+  "vehicle_information" : "Model information",
+  "vehicle_detail_information" : "Detail information",
+  "cellPhone_information" : "CellPhone Model information",
+  "Plan_information" : "Plan information",
+  "addons_information" : "Add ons information",
 
 
   "avatar": "jyp",

@@ -5,9 +5,9 @@
     tag="section"
   >
     <v-row>
-      <v-cal cols="12">
+      <v-col cols="12">
         <Premium_upgrade/>
-      </v-cal>
+      </v-col>
 
       <!-- <v-col
         cols="12"
